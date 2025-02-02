@@ -6,4 +6,7 @@ todo join sports club
 mark 4
 todo borrow book
 list
+todo
+deadline return book /by
+event consultation
 bye

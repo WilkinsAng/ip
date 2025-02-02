@@ -15,28 +15,33 @@ public class Mona {
         String messageIgnoreCaps = message.toLowerCase();
 
         while (!messageIgnoreCaps.equals("bye")) {
-            if (messageIgnoreCaps.equals("list")) {
-                printList();
-            } else if (messageIgnoreCaps.contains("mark") || messageIgnoreCaps.contains("unmark")) {
-                String[] intr = message.split(" ");
-                int index = Integer.parseInt(intr[1]) - 1;
-                if (intr[0].equalsIgnoreCase("mark")){
-                    markTaskDone(tasks.get(index));
+            try {
+                if (messageIgnoreCaps.equals("list")) {
+                    printList();
+                } else if (messageIgnoreCaps.contains("mark") || messageIgnoreCaps.contains("unmark")) {
+                    String[] intr = message.split(" ");
+                    int index = Integer.parseInt(intr[1]) - 1;
+                    if (intr[0].equalsIgnoreCase("mark")) {
+                        markTaskDone(tasks.get(index));
+                    } else {
+                        markTaskUndone(tasks.get(index));
+                    }
+                } else if (messageIgnoreCaps.contains("todo")) {
+                    handleTodo(message);
+                } else if (messageIgnoreCaps.contains("deadline")) {
+                    handleDeadline(message);
+                } else if (messageIgnoreCaps.contains("event")) {
+                    handleEvent(message);
                 } else {
-                    markTaskUndone(tasks.get(index));
+                    throw new MonaException.UnknownCommandException(message);
                 }
-            } else if (messageIgnoreCaps.contains("todo")) {
-                handleTodo(message);
-            } else if (messageIgnoreCaps.contains("deadline")) {
-                handleDeadline(message);
-            } else if (messageIgnoreCaps.contains("event")) {
-                handleEvent(message);
-            } else {
-                System.out.println("What? What's that supposed to mean??");
+            } catch (MonaException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                System.out.println(NEXT_LINE);
+                message = input.nextLine();
+                messageIgnoreCaps = message.toLowerCase();
             }
-            System.out.println(NEXT_LINE);
-            message = input.nextLine();
-            messageIgnoreCaps = message.toLowerCase();
         }
 
         input.close();
@@ -90,24 +95,52 @@ public class Mona {
         System.out.println(task);
     }
 
-    public static void handleTodo(String message) {
+    public static void handleTodo(String message) throws MonaException {
+        if (message.length() < 6) {
+            throw new MonaException.EmptyDescriptionException("todo");
+        }
         String taskName = message.substring(5);
+
+        if (taskName.isBlank()) {
+            throw new MonaException.EmptyDescriptionException("todo");
+        }
         Task task = new Todo(taskName);
         addList(task);
     }
 
-    public static void handleDeadline(String message) {
-        String instr = message.substring(9);
-        String[] taskName = instr.split("/by ");
-        Task task = new Deadline(taskName[0], taskName[1]);
+    public static void handleDeadline(String message) throws MonaException {
+        String[] instr = message.split(" /by");
+
+        //If the first part is just the word "deadline", then there is no description.
+        if (instr[0].equalsIgnoreCase("deadline") ||
+                instr[0].equalsIgnoreCase("deadline ")) {
+            throw new MonaException.EmptyDescriptionException("deadline task");
+        }
+
+        //Ie. 2nd half doesn't exist.
+        if (instr.length < 2) {
+            throw new MonaException.EmptyDeadlineException();
+        }
+        String taskName = instr[0].substring(9);
+        Task task = new Deadline(taskName, instr[1]);
         addList(task);
     }
 
-    public static void handleEvent(String message) {
-        String instr = message.substring(6);
-        String[] taskName = instr.split("/from ");
-        String[] dates = taskName[1].split("/to ");
-        Task task = new Event(taskName[0], dates[0], dates[1]);
+    public static void handleEvent(String message) throws MonaException {
+        String[] instr = message.split(" /from");
+        if (instr[0].equalsIgnoreCase("event") ||
+                instr[0].equalsIgnoreCase("event ")) {
+            throw new MonaException.EmptyDescriptionException("event");
+        }
+        if (instr.length < 2) {
+            throw new MonaException.IncompleteDateException();
+        }
+        String[] dates = instr[1].split("/to ");
+        if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
+            throw new MonaException.IncompleteDateException();
+        }
+        String taskName = instr[0].substring(6);
+        Task task = new Event(taskName, dates[0], dates[1]);
         addList(task);
     }
 }

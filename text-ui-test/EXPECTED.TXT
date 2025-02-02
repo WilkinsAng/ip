@@ -33,5 +33,14 @@ Alright Joker, here is what you need to do:
 4: [T][X] join sports club
 5: [T][ ] borrow book
 ---------------------------------------------------------------------
+C'mon, Joker! You forgot to tell me what the todo is! I may be amazing, but I can't read minds!
+Write in this format: todo <description>
+---------------------------------------------------------------------
+Wait a sec, Joker! You can't set a deadline without a date! What, you expecting me to guess? Give me the details!
+Write in this format: deadline <description> /by <date>
+---------------------------------------------------------------------
+Mrrrow?! An event without a full time range?! Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!
+Write in this format: event <description> /from <time> /to <time>
+---------------------------------------------------------------------
 We should get ready for tomorrow. Goodnight, Joker. Meowww.
 ---------------------------------------------------------------------

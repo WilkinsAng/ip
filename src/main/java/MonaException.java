@@ -3,35 +3,38 @@ public class MonaException extends Exception{
         super(message);
     }
 
-    public class UnknownCommandException extends MonaException {
+    public static class UnknownCommandException extends MonaException {
         public UnknownCommandException(String command) {
-            super(("MErroW? What kind of command is %s? That ain't one of my Phantom Thief tricks, Joker! " +
+            super(("MErroW? What kind of command is /%s/? That ain't one of my Phantom Thief tricks, Joker! " +
                     "Check your input and try again.")
                     .formatted(command));
         }
     }
 
-    public class EmptyDescriptionException extends MonaException {
+    public static class EmptyDescriptionException extends MonaException {
         public EmptyDescriptionException(String taskType) {
             super(("C'mon, Joker! You forgot to tell me what the %s is! " +
-                    "I may be amazing, but I can't read minds!")
-                    .formatted(taskType));
+                    "I may be amazing, but I can't read minds!\n" +
+                    "Write in this format: %s <description>")
+                    .formatted(taskType, taskType));
         }
     }
 
     //Only for deadlines
-    public class EmptyDeadlineException extends MonaException {
+    public static class EmptyDeadlineException extends MonaException {
         public EmptyDeadlineException() {
             super("Wait a sec, Joker! You can't set a deadline without a date! " +
-                    "What, you expecting me to guess? Give me the details!");
+                    "What, you expecting me to guess? Give me the details!\n" +
+                    "Write in this format: deadline <description> /by <date>");
         }
     }
 
     // Only used for events
-    public class IncompleteDateException extends MonaException {
+    public static class IncompleteDateException extends MonaException {
         public IncompleteDateException() {
             super("Mrrrow?! An event without a full time range?! " +
-                    "Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!");
+                    "Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!\n" +
+                    "Write in this format: event <description> /from <time> /to <time>");
         }
     }
 }
