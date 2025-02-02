@@ -13,9 +13,25 @@ public class MonaException extends Exception{
 
     public class EmptyDescriptionException extends MonaException {
         public EmptyDescriptionException(String taskType) {
-            super(("C'mon, Joker! You forgot to tell me what the " + taskType + " is! " +
+            super(("C'mon, Joker! You forgot to tell me what the %s is! " +
                     "I may be amazing, but I can't read minds!")
                     .formatted(taskType));
+        }
+    }
+
+    //Only for deadlines
+    public class EmptyDeadlineException extends MonaException {
+        public EmptyDeadlineException() {
+            super("Wait a sec, Joker! You can't set a deadline without a date! " +
+                    "What, you expecting me to guess? Give me the details!");
+        }
+    }
+
+    // Only used for events
+    public class IncompleteDateException extends MonaException {
+        public IncompleteDateException() {
+            super("Mrrrow?! An event without a full time range?! " +
+                    "Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!");
         }
     }
 }
