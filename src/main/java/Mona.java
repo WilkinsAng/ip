@@ -11,24 +11,32 @@ public class Mona {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         greet();
-        String message = input.nextLine().toLowerCase();
+        String message = input.nextLine();
+        String messageIgnoreCaps = message.toLowerCase();
 
-        while (!message.equals("bye")) {
-            if (message.equals("list")) {
+        while (!messageIgnoreCaps.equals("bye")) {
+            if (messageIgnoreCaps.equals("list")) {
                 printList();
-            } else if (message.contains("mark") || message.contains("unmark")) {
+            } else if (messageIgnoreCaps.contains("mark") || messageIgnoreCaps.contains("unmark")) {
                 String[] intr = message.split(" ");
                 int index = Integer.parseInt(intr[1]) - 1;
-                if (intr[0].equals("mark")){
+                if (intr[0].equalsIgnoreCase("mark")){
                     markTaskDone(tasks.get(index));
                 } else {
                     markTaskUndone(tasks.get(index));
                 }
+            } else if (messageIgnoreCaps.contains("todo")) {
+                handleTodo(message);
+            } else if (messageIgnoreCaps.contains("deadline")) {
+                handleDeadline(message);
+            } else if (messageIgnoreCaps.contains("event")) {
+                handleEvent(message);
             } else {
-                addList(message);
+                System.out.println("What? What's that supposed to mean??");
             }
             System.out.println(NEXT_LINE);
-            message = input.nextLine().toLowerCase();
+            message = input.nextLine();
+            messageIgnoreCaps = message.toLowerCase();
         }
 
         input.close();
@@ -45,10 +53,10 @@ public class Mona {
         System.out.println(NEXT_LINE);
     }
 
-    public static void addList(String input) {
-        Task task = new Task(input);
-        tasks.add(task);
-        System.out.printf("Okie Joker, I'll help you remember to %s.\n", input);
+    public static void addList(Task input) {
+        tasks.add(input);
+        System.out.printf("Okie Joker, I'll help you remember to:\n %s.\n", input);
+        System.out.printf("Don't forget, you have %d tasks now.\n", tasks.size());
     }
 
     public static void printList() {
@@ -80,5 +88,26 @@ public class Mona {
             System.out.println("Hey! Did you forget or something?!");
         }
         System.out.println(task);
+    }
+
+    public static void handleTodo(String message) {
+        String taskName = message.substring(5);
+        Task task = new Todo(taskName);
+        addList(task);
+    }
+
+    public static void handleDeadline(String message) {
+        String instr = message.substring(9);
+        String[] taskName = instr.split("/by ");
+        Task task = new Deadline(taskName[0], taskName[1]);
+        addList(task);
+    }
+
+    public static void handleEvent(String message) {
+        String instr = message.substring(6);
+        String[] taskName = instr.split("/from ");
+        String[] dates = taskName[1].split("/to ");
+        Task task = new Event(taskName[0], dates[0], dates[1]);
+        addList(task);
     }
 }
