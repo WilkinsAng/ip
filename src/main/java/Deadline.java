@@ -3,11 +3,11 @@ public class Deadline extends Task{
 
     public Deadline(String description, String doneBy) {
         super(description);
-        this.doneBy = doneBy;
+        this.doneBy = doneBy.strip();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: %s)".formatted( doneBy);
+        return "[D]" + super.toString() + " (by: %s)".formatted( doneBy);
     }
 }

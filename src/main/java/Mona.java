@@ -50,7 +50,7 @@ public class Mona {
 
     public static void bye() {
         System.out.println(GOODBYE);
-        System.out.println(NEXT_LINE);
+        System.out.print(NEXT_LINE);
     }
 
     public static void addList(Task input) {

@@ -3,7 +3,7 @@ public abstract class Task {
     protected boolean isDone;
 
     public Task(String description) {
-        this.description = description;
+        this.description = description.strip();
         this.isDone = false;
     }
 

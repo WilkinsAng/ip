@@ -1,7 +1,37 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+What's up, Joker? What are we going to do today?
+---------------------------------------------------------------------
+Okie Joker, I'll help you remember to:
+ [T][ ] read book.
+Don't forget, you have 1 tasks now.
+---------------------------------------------------------------------
+Okie Joker, I'll help you remember to:
+ [D][ ] return book (by: June 6th).
+Don't forget, you have 2 tasks now.
+---------------------------------------------------------------------
+Okie Joker, I'll help you remember to:
+ [E][ ] project meeting (from: Aug 6th 2pm, to: 4pm).
+Don't forget, you have 3 tasks now.
+---------------------------------------------------------------------
+All right, Joker! Very smooth!
+[T][X] read book
+---------------------------------------------------------------------
+Okie Joker, I'll help you remember to:
+ [T][ ] join sports club.
+Don't forget, you have 4 tasks now.
+---------------------------------------------------------------------
+All right, Joker! Very smooth!
+[T][X] join sports club
+---------------------------------------------------------------------
+Okie Joker, I'll help you remember to:
+ [T][ ] borrow book.
+Don't forget, you have 5 tasks now.
+---------------------------------------------------------------------
+Alright Joker, here is what you need to do:
+1: [T][X] read book
+2: [D][ ] return book (by: June 6th)
+3: [E][ ] project meeting (from: Aug 6th 2pm, to: 4pm)
+4: [T][X] join sports club
+5: [T][ ] borrow book
+---------------------------------------------------------------------
+We should get ready for tomorrow. Goodnight, Joker. Meowww.
+---------------------------------------------------------------------

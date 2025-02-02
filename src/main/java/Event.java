@@ -4,12 +4,12 @@ public class Event extends Task {
 
     public Event(String description, String startFrom, String endBy) {
         super(description);
-        this.startFrom = startFrom;
-        this.endBy = endBy;
+        this.startFrom = startFrom.strip();
+        this.endBy = endBy.strip();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: %s, to: %s)".formatted(startFrom, endBy);
+        return "[E]" + super.toString() + " (from: %s, to: %s)".formatted(startFrom, endBy);
     }
 }
