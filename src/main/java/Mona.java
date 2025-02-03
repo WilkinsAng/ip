@@ -32,6 +32,8 @@ public class Mona {
                     handleDeadline(message);
                 } else if (messageIgnoreCaps.contains("event")) {
                     handleEvent(message);
+                } else if (messageIgnoreCaps.contains("delete")) {
+                    handleDelete(message);
                 } else {
                     throw new MonaException.UnknownCommandException(message);
                 }
@@ -142,5 +144,24 @@ public class Mona {
         String taskName = instr[0].substring(6);
         Task task = new Event(taskName, dates[0], dates[1]);
         addList(task);
+    }
+
+    public static void handleDelete(String message) throws MonaException {
+        String[] instr = message.split(" ");
+        if (instr.length != 2) {
+            throw new MonaException.EmptyTaskNumberException();
+        }
+        try {
+            int index = Integer.parseInt(instr[1]) - 1;
+            if (index < 0 || index >= tasks.size()) {
+                throw new MonaException.TaskNotFoundException(index + 1);
+            }
+            Task task = tasks.remove(index);
+            System.out.printf("Task #%d has been erased from existence, Joker!\n", index + 1);
+            System.out.printf(" %s\nwon't be bothering us anymore!\n", task);
+            System.out.printf("Don't forget, you have %d tasks now.\n", tasks.size());
+        } catch (NumberFormatException e) {
+            throw new MonaException.InvalidTaskNumberException(instr[1]);
+        }
     }
 }

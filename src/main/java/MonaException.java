@@ -36,5 +36,26 @@ public class MonaException extends Exception{
                     "Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!\n" +
                     "Write in this format: event <description> /from <time> /to <time>");
         }
+
+    }
+
+    public static class TaskNotFoundException extends MonaException {
+        public TaskNotFoundException(int index) {
+            super("Eh?! There is no task #%d! Are you seeing things, Joker?\n".formatted(index) +
+                    "Use /list/ to check your tasks again and give me a valid number!");
+        }
+    }
+
+    public static class InvalidTaskNumberException extends MonaException {
+        public InvalidTaskNumberException(String number) {
+            super("Whoa Joker! /%s/ is not a valid task number! Try again and give me a valid number!"
+                    .formatted(number));
+        }
+    }
+
+    public static class EmptyTaskNumberException extends MonaException {
+        public EmptyTaskNumberException() {
+        super("Huh?! Delete what, Joker? You gotta give me a task number, not just 'delete'!");
+        }
     }
 }

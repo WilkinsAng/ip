@@ -9,4 +9,5 @@ list
 todo
 deadline return book /by
 event consultation
+delete 2
 bye

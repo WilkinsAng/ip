@@ -42,5 +42,10 @@ Write in this format: deadline <description> /by <date>
 Mrrrow?! An event without a full time range?! Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!
 Write in this format: event <description> /from <time> /to <time>
 ---------------------------------------------------------------------
+Task #2 has been erased from existence, Joker!
+ [D][ ] return book (by: June 6th)
+won't be bothering us anymore!
+Don't forget, you have 4 tasks now.
+---------------------------------------------------------------------
 We should get ready for tomorrow. Goodnight, Joker. Meowww.
 ---------------------------------------------------------------------
