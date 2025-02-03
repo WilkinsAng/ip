@@ -5,12 +5,18 @@ public class MonaException extends Exception{
 
     public static class UnknownCommandException extends MonaException {
         public UnknownCommandException(String command) {
-            super(("MErroW? What kind of command is /%s/? That ain't one of my Phantom Thief tricks, Joker! " +
-                    "Check your input and try again.")
-                    .formatted(command));
+            super(("MErroW? What kind of command is /%s/? That ain't one of my Phantom Thief tricks, Joker!\n" +
+                    "Check that your input is one of these and try again:" +
+                    "%s").formatted(command, Command.allCommands()));
         }
     }
 
+    public static class EmptyMarkException extends MonaException {
+        public EmptyMarkException() {
+            super("Eh?! You didn't give me a task number! Try again and give me a valid number!\n" +
+                    "Write in this format: mark <number>");
+        }
+    }
     public static class EmptyDescriptionException extends MonaException {
         public EmptyDescriptionException(String taskType) {
             super(("C'mon, Joker! You forgot to tell me what the %s is! " +

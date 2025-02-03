@@ -1,6 +1,32 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+enum Command {
+    TODO,
+    DEADLINE,
+    EVENT,
+    DELETE,
+    MARK,
+    UNMARK,
+    LIST,
+    BYE;
+
+    public static Command fromString(String command) throws MonaException {
+        try {
+            return Command.valueOf(command.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new MonaException.UnknownCommandException(command);
+        }
+    }
+
+    public static String allCommands() {
+        StringBuilder commands = new StringBuilder();
+        for (Command command : Command.values()) {
+            commands.append("\n").append(command.name());
+        }
+        return commands.toString();
+    }
+}
 public class Mona {
     private static final String INIT = "What's up, Joker? What are we going to do today?";
     private static final String NEXT_LINE = "---------------------------------------------------------------------";
@@ -12,29 +38,32 @@ public class Mona {
         Scanner input = new Scanner(System.in);
         greet();
         String message = input.nextLine();
-        String messageIgnoreCaps = message.toLowerCase();
 
-        while (!messageIgnoreCaps.equals("bye")) {
+        while (!message.toUpperCase().equals(Command.BYE.name())) {
             try {
-                if (messageIgnoreCaps.equals("list")) {
+                String[] splitMsg = message.split(" ");
+                Command command = Command.fromString(splitMsg[0]);
+                switch (command) {
+                case LIST:
                     printList();
-                } else if (messageIgnoreCaps.contains("mark") || messageIgnoreCaps.contains("unmark")) {
-                    String[] intr = message.split(" ");
-                    int index = Integer.parseInt(intr[1]) - 1;
-                    if (intr[0].equalsIgnoreCase("mark")) {
-                        markTaskDone(tasks.get(index));
-                    } else {
-                        markTaskUndone(tasks.get(index));
-                    }
-                } else if (messageIgnoreCaps.contains("todo")) {
+                    break;
+                case MARK:
+                case UNMARK:
+                    handleMark(splitMsg);
+                    break;
+                case TODO:
                     handleTodo(message);
-                } else if (messageIgnoreCaps.contains("deadline")) {
+                    break;
+                case DEADLINE:
                     handleDeadline(message);
-                } else if (messageIgnoreCaps.contains("event")) {
+                    break;
+                case EVENT:
                     handleEvent(message);
-                } else if (messageIgnoreCaps.contains("delete")) {
+                    break;
+                case DELETE:
                     handleDelete(message);
-                } else {
+                    break;
+                default:
                     throw new MonaException.UnknownCommandException(message);
                 }
             } catch (MonaException e) {
@@ -42,7 +71,6 @@ public class Mona {
             } finally {
                 System.out.println(NEXT_LINE);
                 message = input.nextLine();
-                messageIgnoreCaps = message.toLowerCase();
             }
         }
 
@@ -74,6 +102,25 @@ public class Mona {
             for (int i = 1; i <= tasks.size(); i++) {
                 System.out.println(i + ": " + tasks.get(i - 1));
             }
+        }
+    }
+
+    public static void handleMark(String[] instr) throws MonaException {
+        if (instr.length != 2) {
+            throw new MonaException.EmptyMarkException();
+        }
+        try {
+            int index = Integer.parseInt(instr[1]) - 1;
+            if (index < 0 || index >= tasks.size()) {
+                throw new MonaException.TaskNotFoundException(index + 1);
+            }
+            if (instr[0].equalsIgnoreCase("mark")) {
+                markTaskDone(tasks.get(index));
+            } else {
+                markTaskUndone(tasks.get(index));
+            }
+        } catch (NumberFormatException e) {
+            throw new MonaException.InvalidTaskNumberException(instr[1]);
         }
     }
 
