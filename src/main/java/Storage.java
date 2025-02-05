@@ -52,7 +52,21 @@ public class Storage {
             System.out.println("Whoa! Looks like a glitch in the system! I got this message: *" + e.getMessage() + "*. Better check the files, Joker!");
         } catch (MonaException monaException) {
             System.out.println(monaException.getMessage());
+            resetFile();
+            return new ArrayList<>();
         }
         return tasks;
+    }
+
+    private static void resetFile() {
+        try {
+            File data = new File(directory, "Mona.txt");
+            if (data.exists()) {
+                data.delete(); // Delete the corrupted file
+            }
+            data.createNewFile(); // Create a fresh new file
+        } catch (IOException e) {
+            System.out.println("Gah! I tried resetting, but I got this error: \"" + e.getMessage() + "\"!");
+        }
     }
 }

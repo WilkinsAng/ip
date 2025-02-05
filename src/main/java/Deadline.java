@@ -15,4 +15,8 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]" + super.toString() + " (by: %s)".formatted( doneBy);
     }
+
+    public String toSaveFormat() {
+        return "D | %s | %s | %s".formatted(isDone ? "1" : "0", description, doneBy);
+    }
 }

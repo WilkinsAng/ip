@@ -67,7 +67,8 @@ public class MonaException extends Exception{
 
     public static class CorruptedFileException extends MonaException {
         public CorruptedFileException() {
-            super("Mrow?! This save file is a total mess! Looks like it's corrupted, Joker! I'll have to start fresh.");
+            super("Mrow?! This save file is a total mess! Looks like it's corrupted, Joker!" +
+                    " I'll have to start fresh.");
         }
     }
 }
