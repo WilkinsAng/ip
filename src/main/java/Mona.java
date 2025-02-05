@@ -1,41 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-enum Command {
-    TODO,
-    DEADLINE,
-    EVENT,
-    DELETE,
-    MARK,
-    UNMARK,
-    LIST,
-    BYE;
 
-    public static Command fromString(String command) throws MonaException {
-        try {
-            return Command.valueOf(command.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new MonaException.UnknownCommandException(command);
-        }
-    }
-
-    public static String allCommands() {
-        StringBuilder commands = new StringBuilder();
-        for (Command command : Command.values()) {
-            commands.append("\n").append(command.name());
-        }
-        return commands.toString();
-    }
-}
 public class Mona {
     private static final String INIT = "What's up, Joker? What are we going to do today?";
     private static final String NEXT_LINE = "---------------------------------------------------------------------";
     private static final String GOODBYE = "We should get ready for tomorrow. Goodnight, Joker. Meowww.";
-
     private static ArrayList<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        tasks = Storage.loadData();
         greet();
         String message = input.nextLine();
 
@@ -92,6 +67,7 @@ public class Mona {
         tasks.add(input);
         System.out.printf("Okie Joker, I'll help you remember to:\n %s.\n", input);
         System.out.printf("Don't forget, you have %d tasks now.\n", tasks.size());
+        Storage.saveData(tasks);
     }
 
     public static void printList() {
@@ -119,6 +95,7 @@ public class Mona {
             } else {
                 markTaskUndone(tasks.get(index));
             }
+            Storage.saveData(tasks);
         } catch (NumberFormatException e) {
             throw new MonaException.InvalidTaskNumberException(instr[1]);
         }
@@ -204,6 +181,7 @@ public class Mona {
                 throw new MonaException.TaskNotFoundException(index + 1);
             }
             Task task = tasks.remove(index);
+            Storage.saveData(tasks);
             System.out.printf("Task #%d has been erased from existence, Joker!\n", index + 1);
             System.out.printf(" %s\nwon't be bothering us anymore!\n", task);
             System.out.printf("Don't forget, you have %d tasks now.\n", tasks.size());
