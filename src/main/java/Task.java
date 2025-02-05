@@ -52,4 +52,6 @@ public abstract class Task {
     public String toString() {
         return "[%s] %s".formatted(getStatusIcon(), description);
     }
+
+    public abstract String toSaveFormat();
 }

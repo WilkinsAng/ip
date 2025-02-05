@@ -1,23 +1,24 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
 
-    private static final File directory = new File("./data");
+    private static final File DIRECTORY = new File("./data");
+    private static final File DATA = new File(DIRECTORY, "Mona.txt");
 
     public static ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>(100);
         try {
-            if (!directory.exists()) {
-                directory.mkdirs();
+            if (!DIRECTORY.exists()) {
+                DIRECTORY.mkdirs();
             }
-            File data = new File(directory, "Mona.txt");
-            if (!data.exists()) {
-                data.createNewFile();
+            if (!DATA.exists()) {
+                DATA.createNewFile();
             }
-            Scanner contents = new Scanner(data);
+            Scanner contents = new Scanner(DATA);
 
             while (contents.hasNextLine()) {
                 String line = contents.nextLine();
@@ -28,15 +29,24 @@ public class Storage {
 
                 switch (command) {
                 case "T":
+                    if (splitLine.length != 3) {
+                        throw new MonaException.CorruptedFileException();
+                    }
                     Task task = new Todo(description, isDone);
                     tasks.add(task);
                     break;
                 case "D":
+                    if (splitLine.length != 4) {
+                        throw new MonaException.CorruptedFileException();
+                    }
                     String doneBy = splitLine[3];
                     Task deadline = new Deadline(description, isDone, doneBy);
                     tasks.add(deadline);
                     break;
                 case "E":
+                    if (splitLine.length != 5) {
+                        throw new MonaException.CorruptedFileException();
+                    }
                     String[] startEnd = splitLine[3].split(" - ");
                     String startFrom = startEnd[0];
                     String endBy = startEnd[1];
@@ -49,7 +59,8 @@ public class Storage {
             }
             contents.close();
         } catch (IOException e) {
-            System.out.println("Whoa! Looks like a glitch in the system! I got this message: *" + e.getMessage() + "*. Better check the files, Joker!");
+            System.out.println("Whoa! Looks like a glitch in the system! I got this message: *"
+                    + e.getMessage() + "*. Better check the files, Joker!");
         } catch (MonaException monaException) {
             System.out.println(monaException.getMessage());
             resetFile();
@@ -58,13 +69,29 @@ public class Storage {
         return tasks;
     }
 
+    public static void saveData(ArrayList<Task> tasks) {
+        try {
+            FileWriter writer = new FileWriter(DATA);
+
+            for (Task task : tasks) {
+                writer.write(task.toSaveFormat() + "\n");
+            }
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Whoa! Looks like a something went wrong while saving, Joker! I got this message: *"
+                    + e.getMessage());
+        }
+
+    }
+
     private static void resetFile() {
         try {
-            File data = new File(directory, "Mona.txt");
-            if (data.exists()) {
-                data.delete(); // Delete the corrupted file
+            if (DATA.exists()) {
+                DATA.delete(); // Delete the corrupted file
             }
-            data.createNewFile(); // Create a fresh new file
+            DATA.createNewFile(); // Create a fresh new file
         } catch (IOException e) {
             System.out.println("Gah! I tried resetting, but I got this error: \"" + e.getMessage() + "\"!");
         }

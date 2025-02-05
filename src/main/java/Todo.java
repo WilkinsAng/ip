@@ -13,6 +13,7 @@ public class Todo extends Task {
         return "[T]" + super.toString() ;
     }
 
+    @Override
     public String toSaveFormat() {
         return "T | %s | %s".formatted(isDone ? "1" : "0", description);
     }

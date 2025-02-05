@@ -19,6 +19,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: %s, to: %s)".formatted(startFrom, endBy);
     }
 
+    @Override
     public String toSaveFormat() {
         return "E | %s | %s | %s - %s".formatted(isDone ? "1" : "0", description, startFrom, endBy);
     }
