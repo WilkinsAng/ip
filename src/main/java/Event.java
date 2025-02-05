@@ -8,6 +8,12 @@ public class Event extends Task {
         this.endBy = endBy.strip();
     }
 
+    public Event(String description, boolean isDone, String startFrom, String endBy) {
+        super(description, isDone);
+        this.startFrom = startFrom.strip();
+        this.endBy = endBy.strip();
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: %s, to: %s)".formatted(startFrom, endBy);

@@ -6,7 +6,6 @@ public class Mona {
     private static final String INIT = "What's up, Joker? What are we going to do today?";
     private static final String NEXT_LINE = "---------------------------------------------------------------------";
     private static final String GOODBYE = "We should get ready for tomorrow. Goodnight, Joker. Meowww.";
-
     private static ArrayList<Task> tasks = new ArrayList<>(100);
 
     public static void main(String[] args) {

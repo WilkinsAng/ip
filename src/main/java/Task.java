@@ -15,6 +15,11 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description.strip();
+        this.isDone = isDone;
+    }
+
     /**
      * Returns the status icon of the task.
      *

@@ -64,4 +64,10 @@ public class MonaException extends Exception{
         super("Huh?! Delete what, Joker? You gotta give me a task number, not just 'delete'!");
         }
     }
+
+    public static class CorruptedFileException extends MonaException {
+        public CorruptedFileException() {
+            super("Mrow?! This save file is a total mess! Looks like it's corrupted, Joker! I'll have to start fresh.");
+        }
+    }
 }
