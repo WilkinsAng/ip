@@ -74,7 +74,7 @@ public class MonaException extends Exception{
 
     public static class InvalidDateFormatException extends MonaException {
         public InvalidDateFormatException() {
-            super("Mrow?! That doesn't look right, Joker! Try this format instead: '15 Jul 2024 18:30 PM'.");
+            super("Mrow?! That doesn't look right, Joker! Try this format instead: '15 Jul 2024 11:30pm'.");
         }
     }
 }

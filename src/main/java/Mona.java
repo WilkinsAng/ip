@@ -148,7 +148,7 @@ public class Mona {
             throw new MonaException.EmptyDeadlineException();
         }
         String taskName = instr[0].substring(9);
-        Task task = new Deadline(taskName, instr[1]);
+        Task task = new Deadline(taskName, instr[1].strip());
         addList(task);
     }
 
@@ -166,7 +166,7 @@ public class Mona {
             throw new MonaException.IncompleteDateException();
         }
         String taskName = instr[0].substring(6);
-        Task task = new Event(taskName, dates[0], dates[1]);
+        Task task = new Event(taskName, dates[0].strip(), dates[1].strip());
         addList(task);
     }
 

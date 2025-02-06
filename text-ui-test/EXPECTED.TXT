@@ -5,11 +5,11 @@ Okie Joker, I'll help you remember to:
 Don't forget, you have 1 tasks now.
 ---------------------------------------------------------------------
 Okie Joker, I'll help you remember to:
- [D][ ] return book (by: June 6th).
+ [D][ ] return book (by: 2025 Jul 6, 12:00pm).
 Don't forget, you have 2 tasks now.
 ---------------------------------------------------------------------
 Okie Joker, I'll help you remember to:
- [E][ ] project meeting (from: Aug 6th 2pm, to: 4pm).
+ [E][ ] project meeting (from: 2025 Aug 6, 2:00pm, to: 2025 Aug 6, 4:00pm).
 Don't forget, you have 3 tasks now.
 ---------------------------------------------------------------------
 All right, Joker! Very smooth!
@@ -28,8 +28,8 @@ Don't forget, you have 5 tasks now.
 ---------------------------------------------------------------------
 Alright Joker, here is what you need to do:
 1: [T][X] read book
-2: [D][ ] return book (by: June 6th)
-3: [E][ ] project meeting (from: Aug 6th 2pm, to: 4pm)
+2: [D][ ] return book (by: 2025 Jul 6, 12:00pm)
+3: [E][ ] project meeting (from: 2025 Aug 6, 2:00pm, to: 2025 Aug 6, 4:00pm)
 4: [T][X] join sports club
 5: [T][ ] borrow book
 ---------------------------------------------------------------------
@@ -43,7 +43,7 @@ Mrrrow?! An event without a full time range?! Even *Mona the Magnificent* can’
 Write in this format: event <description> /from <time> /to <time>
 ---------------------------------------------------------------------
 Task #2 has been erased from existence, Joker!
- [D][ ] return book (by: June 6th)
+ [D][ ] return book (by: 2025 Jul 6, 12:00pm)
 won't be bothering us anymore!
 Don't forget, you have 4 tasks now.
 ---------------------------------------------------------------------

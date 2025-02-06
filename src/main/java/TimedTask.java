@@ -1,11 +1,10 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.DateTimeException;
 
 public abstract class TimedTask extends Task {
-    protected static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm a");
-    protected static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm a");
+    protected static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy h:mma");
+    protected static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM d, h:mma");
 
     public TimedTask(String description) {
         super(description);
