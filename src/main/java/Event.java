@@ -1,26 +1,30 @@
-public class Event extends Task {
-    protected String startFrom;
-    protected String endBy;
+import java.time.LocalDateTime;
 
-    public Event(String description, String startFrom, String endBy) {
+public class Event extends TimedTask {
+    protected LocalDateTime startFrom;
+    protected LocalDateTime endBy;
+
+    public Event(String description, String startFrom, String endBy) throws MonaException {
         super(description);
-        this.startFrom = startFrom.strip();
-        this.endBy = endBy.strip();
+        this.startFrom = parseDateTime(startFrom);
+        this.endBy = parseDateTime(endBy);
     }
 
-    public Event(String description, boolean isDone, String startFrom, String endBy) {
+    public Event(String description, boolean isDone, String startFrom, String endBy) throws MonaException {
         super(description, isDone);
-        this.startFrom = startFrom.strip();
-        this.endBy = endBy.strip();
+        this.startFrom = parseDateTime(startFrom);
+        this.endBy = parseDateTime(endBy);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: %s, to: %s)".formatted(startFrom, endBy);
+        return "[E]" + super.toString() + " (from: %s, to: %s)"
+                .formatted(formatDateTime(startFrom), formatDateTime(endBy));
     }
 
     @Override
     public String toSaveFormat() {
-        return "E | %s | %s | %s - %s".formatted(isDone ? "1" : "0", description, startFrom, endBy);
+        return "E | %s | %s | %s - %s".formatted(isDone ? "1" : "0", description,
+                startFrom.format(INPUT_FORMATTER), endBy.format(INPUT_FORMATTER));
     }
 }
