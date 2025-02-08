@@ -1,7 +1,15 @@
-public class UnmarkCommand extends Command{
+package command;
+
+import exception.MonaException;
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+
+public class MarkCommand extends Command {
     private int index;
 
-    public UnmarkCommand(int index) {
+    public MarkCommand(int index) {
         super();
         this.index = index;
     }
@@ -14,12 +22,12 @@ public class UnmarkCommand extends Command{
 
         Task task = tasks.getTask(index);
 
-        if (task.getIsDone()){
-            task.markAsUndone();
+        if (!task.getIsDone()) {
+            task.markAsDone();
         } else {
-            throw new MonaException.TaskAlreadyUndoneException(task);
+            throw new MonaException.TaskAlreadyDoneException(task);
         }
         storage.saveData(tasks);
-        ui.showUnmarkMessage(task);
+        ui.showMarkMessage(task);
     }
 }
