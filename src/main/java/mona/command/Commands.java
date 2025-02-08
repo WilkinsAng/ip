@@ -1,6 +1,6 @@
-package command;
+package mona.command;
 
-import exception.MonaException;
+import mona.exception.MonaException;
 
 public enum Commands {
     TODO,

@@ -1,9 +1,9 @@
-package ui;
+package mona.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.Task;
+import mona.task.Task;
 
 public class Ui {
     private static final String NEXT_LINE = "---------------------------------------------------------------------";

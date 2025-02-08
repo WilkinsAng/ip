@@ -1,17 +1,17 @@
-package parser;
+package mona.parser;
 
-import command.AddTaskCommand;
-import command.ByeCommand;
-import command.Command;
-import command.Commands;
-import command.DeleteCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.UnmarkCommand;
-import exception.MonaException;
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import mona.command.AddTaskCommand;
+import mona.command.ByeCommand;
+import mona.command.Command;
+import mona.command.Commands;
+import mona.command.DeleteCommand;
+import mona.command.ListCommand;
+import mona.command.MarkCommand;
+import mona.command.UnmarkCommand;
+import mona.exception.MonaException;
+import mona.task.Deadline;
+import mona.task.Event;
+import mona.task.Todo;
 
 public class Parser {
 

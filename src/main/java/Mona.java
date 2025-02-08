@@ -1,9 +1,9 @@
-import command.Command;
-import exception.MonaException;
-import parser.Parser;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import mona.command.Command;
+import mona.exception.MonaException;
+import mona.parser.Parser;
+import mona.storage.Storage;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 
 public class Mona {

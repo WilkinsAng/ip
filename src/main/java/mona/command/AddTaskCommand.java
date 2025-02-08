@@ -1,9 +1,9 @@
-package command;
+package mona.command;
 
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import ui.Ui;
+import mona.storage.Storage;
+import mona.task.Task;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 public class AddTaskCommand extends Command {
     private Task task;

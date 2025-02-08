@@ -1,8 +1,8 @@
-package task;
+package mona.task;
 
 import java.time.LocalDateTime;
 
-import exception.MonaException;
+import mona.exception.MonaException;
 
 public class Event extends TimedTask {
     protected LocalDateTime startFrom;

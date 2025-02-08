@@ -1,9 +1,9 @@
-package command;
+package mona.command;
 
-import exception.MonaException;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import mona.exception.MonaException;
+import mona.storage.Storage;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 public abstract class Command {
 
@@ -14,7 +14,7 @@ public abstract class Command {
         return this.isExit;
     }
 
-    public void setExit() {
+    public void markAsExit() {
         isExit = true;
     }
 }

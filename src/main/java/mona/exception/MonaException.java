@@ -1,7 +1,7 @@
-package exception;
+package mona.exception;
 
-import command.Commands;
-import task.Task;
+import mona.command.Commands;
+import mona.task.Task;
 
 public class MonaException extends Exception{
     public MonaException(String message) {

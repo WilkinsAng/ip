@@ -1,4 +1,4 @@
-package task;
+package mona.task;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class TaskList {
         return tasks.remove(index);
     }
 
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTaskList() {
         return tasks;
     }
 

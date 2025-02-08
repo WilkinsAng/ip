@@ -1,8 +1,8 @@
-package task;
+package mona.task;
 
 import java.time.LocalDateTime;
 
-import exception.MonaException;
+import mona.exception.MonaException;
 
 public class Deadline extends TimedTask {
     protected LocalDateTime doneBy;

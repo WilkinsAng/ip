@@ -1,4 +1,4 @@
-package storage;
+package mona.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import exception.MonaException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import mona.exception.MonaException;
+import mona.task.Deadline;
+import mona.task.Event;
+import mona.task.Task;
+import mona.task.TaskList;
+import mona.task.Todo;
 
 public class Storage {
 
@@ -95,7 +95,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(data);
 
-            for (Task task : tasks.getTasks()) {
+            for (Task task : tasks.getTaskList()) {
                 writer.write(task.toSaveFormat() + "\n");
             }
 
