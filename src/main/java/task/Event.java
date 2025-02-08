@@ -1,4 +1,8 @@
+package task;
+
 import java.time.LocalDateTime;
+
+import exception.MonaException;
 
 public class Event extends TimedTask {
     protected LocalDateTime startFrom;
@@ -6,25 +10,25 @@ public class Event extends TimedTask {
 
     public Event(String description, String startFrom, String endBy) throws MonaException {
         super(description);
-        this.startFrom = parseDateTime(startFrom);
-        this.endBy = parseDateTime(endBy);
+        this.startFrom = TimedTask.parseDateTime(startFrom);
+        this.endBy = TimedTask.parseDateTime(endBy);
     }
 
     public Event(String description, boolean isDone, String startFrom, String endBy) throws MonaException {
         super(description, isDone);
-        this.startFrom = parseDateTime(startFrom);
-        this.endBy = parseDateTime(endBy);
+        this.startFrom = TimedTask.parseDateTime(startFrom);
+        this.endBy = TimedTask.parseDateTime(endBy);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: %s, to: %s)"
-                .formatted(formatDateTime(startFrom), formatDateTime(endBy));
+                .formatted(TimedTask.formatDateTime(startFrom), TimedTask.formatDateTime(endBy));
     }
 
     @Override
     public String toSaveFormat() {
         return "E | %s | %s | %s - %s".formatted(isDone ? "1" : "0", super.description,
-                startFrom.format(INPUT_FORMATTER), endBy.format(INPUT_FORMATTER));
+                startFrom.format(TimedTask.INPUT_FORMATTER), endBy.format(TimedTask.INPUT_FORMATTER));
     }
 }

@@ -1,5 +1,9 @@
+package ui;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import task.Task;
 
 public class Ui {
     private static final String NEXT_LINE = "---------------------------------------------------------------------";
@@ -35,7 +39,7 @@ public class Ui {
     }
 
     public void showDeleteTask(int index, Task task, int taskSize) {
-        System.out.printf("Task #%d has been erased from existence, Joker!\n", index + 1);
+        System.out.printf("task.Task #%d has been erased from existence, Joker!\n", index + 1);
         System.out.printf(" %s\nwon't be bothering us anymore!\n", task);
         System.out.printf("Don't forget, you have %d tasks now.\n", taskSize);
     }

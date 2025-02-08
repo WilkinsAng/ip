@@ -1,3 +1,5 @@
+package task;
+
 /**
  * Represents a task with a description and completion status.
  */
@@ -6,7 +8,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructs a new Task.
+     * Constructs a new task.Task.
      *
      * @param description the description of the task.
      */

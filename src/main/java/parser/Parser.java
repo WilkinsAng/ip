@@ -1,6 +1,21 @@
+package parser;
+
+import command.AddTaskCommand;
+import command.ByeCommand;
+import command.Command;
+import command.Commands;
+import command.DeleteCommand;
+import command.ListCommand;
+import command.MarkCommand;
+import command.UnmarkCommand;
+import exception.MonaException;
+import task.Deadline;
+import task.Event;
+import task.Todo;
+
 public class Parser {
 
-    public static Command parse(String message) throws MonaException{
+    public static Command parse(String message) throws MonaException {
         String[] splitMsg = message.split(" ");
         Commands command = Commands.fromString(splitMsg[0]);
         switch (command) {
