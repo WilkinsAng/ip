@@ -2,8 +2,8 @@
  * Represents a task with a description and completion status.
  */
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructs a new Task.
@@ -20,6 +20,9 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
     /**
      * Returns the status icon of the task.
      *

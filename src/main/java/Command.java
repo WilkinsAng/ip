@@ -1,26 +1,13 @@
-public enum Command {
-    TODO,
-    DEADLINE,
-    EVENT,
-    DELETE,
-    MARK,
-    UNMARK,
-    LIST,
-    BYE;
+public abstract class Command {
 
-    public static Command fromString(String command) throws MonaException {
-        try {
-            return Command.valueOf(command.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new MonaException.UnknownCommandException(command);
-        }
+    private boolean isExit = false;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException;
+
+    public boolean isExit() {
+        return this.isExit;
     }
 
-    public static String allCommands() {
-        StringBuilder commands = new StringBuilder();
-        for (Command command : Command.values()) {
-            commands.append("\n").append(command.name());
-        }
-        return commands.toString();
+    public void setExit() {
+        isExit = true;
     }
 }

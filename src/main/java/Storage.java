@@ -9,7 +9,7 @@ public class Storage {
     private static final File DIRECTORY = new File("./data");
     private static final File DATA = new File(DIRECTORY, "Mona.txt");
 
-    public static ArrayList<Task> loadData() {
+    public ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>(100);
         try {
             if (!DIRECTORY.exists()) {
@@ -69,11 +69,11 @@ public class Storage {
         return tasks;
     }
 
-    public static void saveData(ArrayList<Task> tasks) {
+    public void saveData(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(DATA);
 
-            for (Task task : tasks) {
+            for (Task task : tasks.getTasks()) {
                 writer.write(task.toSaveFormat() + "\n");
             }
 
@@ -86,7 +86,7 @@ public class Storage {
 
     }
 
-    private static void resetFile() {
+    private void resetFile() {
         try {
             if (DATA.exists()) {
                 DATA.delete(); // Delete the corrupted file
