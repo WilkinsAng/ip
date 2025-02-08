@@ -24,7 +24,7 @@ public class Event extends TimedTask {
 
     @Override
     public String toSaveFormat() {
-        return "E | %s | %s | %s - %s".formatted(isDone ? "1" : "0", description,
+        return "E | %s | %s | %s - %s".formatted(isDone ? "1" : "0", super.description,
                 startFrom.format(INPUT_FORMATTER), endBy.format(INPUT_FORMATTER));
     }
 }

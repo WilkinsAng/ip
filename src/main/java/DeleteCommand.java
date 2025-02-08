@@ -13,8 +13,6 @@ public class DeleteCommand extends Command {
         }
         Task task = tasks.deleteTask(index);
         storage.saveData(tasks);
-        System.out.printf("Task #%d has been erased from existence, Joker!\n", index + 1);
-        System.out.printf(" %s\nwon't be bothering us anymore!\n", task);
-        System.out.printf("Don't forget, you have %d tasks now.\n", tasks.size());
+        ui.showDeleteTask(index, task, tasks.getSize());
     }
 }

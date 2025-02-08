@@ -7,7 +7,7 @@ public class MonaException extends Exception{
         public UnknownCommandException(String command) {
             super(("MErroW? What kind of command is /%s/? That ain't one of my Phantom Thief tricks, Joker!\n" +
                     "Check that your input is one of these and try again:" +
-                    "%s").formatted(command, Command.allCommands()));
+                    "%s").formatted(command, Commands.allCommands()));
         }
     }
 
@@ -75,6 +75,17 @@ public class MonaException extends Exception{
     public static class InvalidDateFormatException extends MonaException {
         public InvalidDateFormatException() {
             super("Mrow?! That doesn't look right, Joker! Try this format instead: '15 Jul 2024 11:30pm'.");
+        }
+    }
+    public static class TaskAlreadyDoneException extends MonaException {
+        public TaskAlreadyDoneException(Task task) {
+            super("Hey! It's already done!!\n%s".formatted(task));
+        }
+    }
+
+    public static class TaskAlreadyUndoneException extends MonaException {
+        public TaskAlreadyUndoneException(Task task) {
+            super("Hey! Did you forget or something?!\n%s".formatted(task));
         }
     }
 }

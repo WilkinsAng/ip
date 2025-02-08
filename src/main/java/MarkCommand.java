@@ -16,11 +16,10 @@ public class MarkCommand extends Command{
 
         if (!task.getIsDone()) {
             task.markAsDone();
-            System.out.println("All right, Joker! Very smooth!");
         } else {
-            System.out.println("Hey! It's already done!!");
+            throw new MonaException.TaskAlreadyDoneException(task);
         }
         storage.saveData(tasks);
-        System.out.println(task);
+        ui.showMarkMessage(task);
     }
 }

@@ -6,19 +6,32 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static final File DIRECTORY = new File("./data");
-    private static final File DATA = new File(DIRECTORY, "Mona.txt");
+    private static final File DEFAULT_DIRECTORY = new File("./data");
+    private static final File DEFAULT_DATA = new File(DEFAULT_DIRECTORY, "Mona.txt");
 
+    private final File directory;
+    private final File data;
+
+    public Storage() {
+        this.directory = DEFAULT_DIRECTORY;
+        this.data = DEFAULT_DATA;
+    }
+
+    public Storage(String filepath) {
+        this.directory = DEFAULT_DIRECTORY;
+        String[] filepathSplit = filepath.split("/");
+        this.data = new File(DEFAULT_DIRECTORY, filepathSplit[1]);
+    }
     public ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>(100);
         try {
-            if (!DIRECTORY.exists()) {
-                DIRECTORY.mkdirs();
+            if (!directory.exists()) {
+                directory.mkdirs();
             }
-            if (!DATA.exists()) {
-                DATA.createNewFile();
+            if (!data.exists()) {
+                data.createNewFile();
             }
-            Scanner contents = new Scanner(DATA);
+            Scanner contents = new Scanner(data);
 
             while (contents.hasNextLine()) {
                 String line = contents.nextLine();
@@ -71,7 +84,7 @@ public class Storage {
 
     public void saveData(TaskList tasks) {
         try {
-            FileWriter writer = new FileWriter(DATA);
+            FileWriter writer = new FileWriter(data);
 
             for (Task task : tasks.getTasks()) {
                 writer.write(task.toSaveFormat() + "\n");
@@ -88,10 +101,10 @@ public class Storage {
 
     private void resetFile() {
         try {
-            if (DATA.exists()) {
-                DATA.delete(); // Delete the corrupted file
+            if (data.exists()) {
+                data.delete(); // Delete the corrupted file
             }
-            DATA.createNewFile(); // Create a fresh new file
+            data.createNewFile(); // Create a fresh new file
         } catch (IOException e) {
             System.out.println("Gah! I tried resetting, but I got this error: \"" + e.getMessage() + "\"!");
         }

@@ -16,10 +16,10 @@ public class UnmarkCommand extends Command{
 
         if (task.getIsDone()){
             task.markAsUndone();
-            System.out.println("What?! Come on, Joker...!");
         } else {
-            System.out.println("Hey! Did you forget or something?!");
+            throw new MonaException.TaskAlreadyUndoneException(task);
         }
-        System.out.println(task);
+        storage.saveData(tasks);
+        ui.showUnmarkMessage(task);
     }
 }

@@ -17,6 +17,8 @@ public class Parser {
             return handleEvent(message);
         case DELETE:
             return handleDelete(message);
+        case BYE:
+            return handleBye();
         default:
             throw new MonaException.UnknownCommandException(message);
         }
@@ -24,6 +26,10 @@ public class Parser {
 
     public static ListCommand printList() {
         return new ListCommand();
+    }
+
+    public static ByeCommand handleBye() {
+        return new ByeCommand();
     }
 
     public static Command handleMark(String[] parts) throws MonaException {
