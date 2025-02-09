@@ -1,8 +1,8 @@
-package command;
+package mona.command;
 
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import mona.storage.Storage;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 /**
  * Represents a command that ends the program.
@@ -19,7 +19,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        super.setExit();
+        super.markAsExit();
         ui.bye();
     }
 }

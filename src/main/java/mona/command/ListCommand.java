@@ -1,9 +1,9 @@
-package command;
+package mona.command;
 
-import exception.MonaException;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import mona.exception.MonaException;
+import mona.storage.Storage;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 /**
  * Represents a command that lists all tasks in the task list.
@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * @throws MonaException If an error occurs while retrieving tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
-        ui.showAllTasks(tasks.getTasks());
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.showAllTasks(tasks.getTaskList());
     }
 }

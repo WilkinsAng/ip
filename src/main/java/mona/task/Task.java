@@ -1,4 +1,4 @@
-package task;
+package mona.task;
 
 /**
  * Represents a generic task with a description and a completion status.
@@ -35,7 +35,7 @@ public abstract class Task {
      *
      * @return {@code true} if the task is done, {@code false} otherwise.
      */
-    public boolean getIsDone() {
+    public boolean isDone() {
         return isDone;
     }
 

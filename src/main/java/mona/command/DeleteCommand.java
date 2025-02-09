@@ -1,17 +1,17 @@
-package command;
+package mona.command;
 
-import exception.MonaException;
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import ui.Ui;
+import mona.exception.MonaException;
+import mona.storage.Storage;
+import mona.task.Task;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 /**
  * Represents a command to delete a task from the task list.
  */
 public class DeleteCommand extends Command {
 
-    private int index;
+    private int taskIndex;
 
     /**
      * Creates a new DeleteCommand with specified task index.
@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int index) {
         super();
-        this.index = index;
+        this.taskIndex = index;
     }
 
     /**
@@ -32,13 +32,16 @@ public class DeleteCommand extends Command {
      * @param storage The storage handler to save the updated task list.
      * @throws MonaException If the index is out of bounds or the task is not found.
      */
-    @Override
+
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
-        if (index < 0 || index >= tasks.getSize()) {
-            throw new MonaException.TaskNotFoundException(index + 1);
+        if (taskIndex < 0 || taskIndex >= tasks.getSize()) {
+            throw new MonaException.TaskNotFoundException(taskIndex + 1);
         }
-        Task task = tasks.deleteTask(index);
+
+        Task task = tasks.deleteTask(taskIndex);
+
         storage.saveData(tasks);
-        ui.showDeleteTask(index, task, tasks.getSize());
+
+        ui.showDeleteTask(taskIndex, task, tasks.getSize());
     }
 }

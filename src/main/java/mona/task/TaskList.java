@@ -1,4 +1,4 @@
-package task;
+package mona.task;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class TaskList {
      *
      * @param task The task to add.
      */
-    public void addList(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 
@@ -49,7 +49,7 @@ public class TaskList {
      *
      * @return The list containing all tasks.
      */
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTaskList() {
         return tasks;
     }
 

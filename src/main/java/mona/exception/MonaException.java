@@ -1,7 +1,7 @@
-package exception;
+package mona.exception;
 
-import command.Commands;
-import task.Task;
+import mona.command.Commands;
+import mona.task.Task;
 
 /**
  * Exception class for handling various types of exceptions in the application.
@@ -174,7 +174,7 @@ public class MonaException extends Exception {
          * @param task the task that is already done.
          */
         public TaskAlreadyDoneException(Task task) {
-            super("Hey! It's already done!!\n%s".formatted(task));
+            super("Hey! It's already done!! No need to mark it again!\n%s".formatted(task));
         }
     }
 
@@ -189,7 +189,7 @@ public class MonaException extends Exception {
          * @param task the task that is already undone.
          */
         public TaskAlreadyUndoneException(Task task) {
-            super("Hey! Did you forget or something?!\n%s".formatted(task));
+            super("Hey! Did you forget or something?! This task is already incomplete!\n%s".formatted(task));
         }
     }
 }

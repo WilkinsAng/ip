@@ -1,10 +1,10 @@
-package command;
+package mona.command;
 
 import org.junit.jupiter.api.Test;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
-import task.Todo;
+import mona.storage.Storage;
+import mona.task.TaskList;
+import mona.ui.Ui;
+import mona.task.Todo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

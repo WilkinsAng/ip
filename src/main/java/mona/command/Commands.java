@@ -1,6 +1,6 @@
-package command;
+package mona.command;
 
-import exception.MonaException;
+import mona.exception.MonaException;
 
 /**
  * Represents the different commands that can be executed by the application.

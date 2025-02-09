@@ -1,17 +1,18 @@
-package storage;
+package mona.storage;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import exception.MonaException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import mona.exception.MonaException;
+import mona.task.Deadline;
+import mona.task.Event;
+import mona.task.Task;
+import mona.task.TaskList;
+import mona.task.Todo;
 
 /**
  * Handles loading and saving tasks to a local file for persistence.
@@ -40,7 +41,10 @@ public class Storage {
     public Storage(String filepath) {
         this.directory = DEFAULT_DIRECTORY;
         String[] filepathSplit = filepath.split("/");
-        this.data = new File(DEFAULT_DIRECTORY, filepathSplit[1]);
+
+        // If the filepath is empty, use the default filename
+        String filename = filepathSplit.length > 1 ? filepathSplit[1] : "Mona.txt";
+        this.data = new File(DEFAULT_DIRECTORY, filename);
     }
 
     /**
@@ -117,7 +121,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(data);
 
-            for (Task task : tasks.getTasks()) {
+            for (Task task : tasks.getTaskList()) {
                 writer.write(task.toSaveFormat() + "\n");
             }
 
@@ -135,9 +139,7 @@ public class Storage {
      */
     private void resetFile() {
         try {
-            if (data.exists()) {
-                data.delete(); // Delete the corrupted file
-            }
+            Files.deleteIfExists(data.toPath());
             data.createNewFile(); // Create a fresh new file
         } catch (IOException e) {
             System.out.println("Gah! I tried resetting, but I got this error: \"" + e.getMessage() + "\"!");

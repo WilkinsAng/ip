@@ -1,16 +1,16 @@
-package command;
+package mona.command;
 
-import exception.MonaException;
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import ui.Ui;
+import mona.exception.MonaException;
+import mona.storage.Storage;
+import mona.task.Task;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 /**
  * Represents a command to mark a task as done.
  */
 public class MarkCommand extends Command {
-    private int index;
+    private int taskIndex;
 
     /**
      * Constructs a MarkCommand with the specified task index.
@@ -19,7 +19,7 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(int index) {
         super();
-        this.index = index;
+        this.taskIndex = index;
     }
 
     /**
@@ -34,13 +34,13 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
-        if (index < 0 || index >= tasks.getSize()) {
-            throw new MonaException.TaskNotFoundException(index + 1);
+        if (taskIndex < 0 || taskIndex >= tasks.getSize()) {
+            throw new MonaException.TaskNotFoundException(taskIndex + 1);
         }
 
-        Task task = tasks.getTask(index);
+        Task task = tasks.getTask(taskIndex);
 
-        if (!task.getIsDone()) {
+        if (!task.isDone()) {
             task.markAsDone();
         } else {
             throw new MonaException.TaskAlreadyDoneException(task);

@@ -1,9 +1,9 @@
-package command;
+package mona.command;
 
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import ui.Ui;
+import mona.storage.Storage;
+import mona.task.Task;
+import mona.task.TaskList;
+import mona.ui.Ui;
 
 /**
  * Represents a command that adds a task to the task list.
@@ -31,7 +31,7 @@ public class AddTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addList(task);
+        tasks.addTask(task);
         storage.saveData(tasks);
         ui.showAddTask(task, tasks.getSize());
     }

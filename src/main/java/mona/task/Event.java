@@ -1,8 +1,8 @@
-package task;
+package mona.task;
 
 import java.time.LocalDateTime;
 
-import exception.MonaException;
+import mona.exception.MonaException;
 
 /**
  * Represents an event task with a start and end date/time.
@@ -59,7 +59,9 @@ public class Event extends TimedTask {
      */
     @Override
     public String toSaveFormat() {
-        return "E | %s | %s | %s - %s".formatted(isDone ? "1" : "0", super.description,
-                startFrom.format(TimedTask.INPUT_FORMATTER), endBy.format(TimedTask.INPUT_FORMATTER));
+        String status = isDone ? "1" : "0";
+        String formattedStart = startFrom.format(TimedTask.INPUT_FORMATTER);
+        String formattedEnd = endBy.format(TimedTask.INPUT_FORMATTER);
+        return "E | %s | %s | %s - %s".formatted(status, description, formattedStart, formattedEnd);
     }
 }

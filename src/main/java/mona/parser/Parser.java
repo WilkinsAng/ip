@@ -1,20 +1,17 @@
-/**
- * Parses user input into commands.
- */
-package parser;
+package mona.parser;
 
-import command.AddTaskCommand;
-import command.ByeCommand;
-import command.Command;
-import command.Commands;
-import command.DeleteCommand;
-import command.ListCommand;
-import command.MarkCommand;
-import command.UnmarkCommand;
-import exception.MonaException;
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import mona.command.AddTaskCommand;
+import mona.command.ByeCommand;
+import mona.command.Command;
+import mona.command.Commands;
+import mona.command.DeleteCommand;
+import mona.command.ListCommand;
+import mona.command.MarkCommand;
+import mona.command.UnmarkCommand;
+import mona.exception.MonaException;
+import mona.task.Deadline;
+import mona.task.Event;
+import mona.task.Todo;
 
 /**
  * Parses user input messages and converts them into executable commands.
@@ -33,7 +30,7 @@ public class Parser {
         Commands command = Commands.fromString(splitMsg[0]);
         switch (command) {
         case LIST:
-            return printList();
+            return createListCommand();
         case MARK:
         case UNMARK:
             return handleMark(splitMsg);
@@ -46,7 +43,7 @@ public class Parser {
         case DELETE:
             return handleDelete(message);
         case BYE:
-            return handleBye();
+            return createByeCommand();
         default:
             throw new MonaException.UnknownCommandException(message);
         }
@@ -54,25 +51,25 @@ public class Parser {
 
     /**
      * Creates a command to list all tasks.
-     * 
+     *
      * @return a new {@link ListCommand}
      */
-    public static ListCommand printList() {
+    public static ListCommand createListCommand() {
         return new ListCommand();
     }
 
     /**
      * Creates a command to exit the program.
-     * 
+     *
      * @return a new {@link ByeCommand}
      */
-    public static ByeCommand handleBye() {
+    public static ByeCommand createByeCommand() {
         return new ByeCommand();
     }
 
     /**
      * Handles marking or unmarking a task.
-     * 
+     *
      * @param parts The user input split into words.
      * @return a new {@link MarkCommand} or an {@link UnmarkCommand}
      * @throws MonaException if the input is invalid
@@ -95,15 +92,16 @@ public class Parser {
 
     /**
      * Handles adding a new Todo task.
-     * 
+     *
      * @param message The user input message.
      * @return a new {@link AddTaskCommand} for a {@link Todo}
      * @throws MonaException if the input is invalid
      */
     public static AddTaskCommand handleTodo(String message) throws MonaException {
-        if (message.length() < 6) {
+        if (message.length() <= 5) {
             throw new MonaException.EmptyDescriptionException("todo");
         }
+
         String taskName = message.substring(5);
 
         if (taskName.isBlank()) {
@@ -120,19 +118,19 @@ public class Parser {
      * @throws MonaException if the input is invalid
      */
     public static AddTaskCommand handleDeadline(String message) throws MonaException {
-        String[] instr = message.split(" /by");
+        String[] parts = message.split(" /by");
 
-        // If the first part is just the word "deadline", then there is no description.
-        if (instr[0].strip().equalsIgnoreCase("deadline")) {
+        //If the first part is just the word "deadline", then there is no description.
+        if (parts[0].strip().equalsIgnoreCase("deadline")) {
             throw new MonaException.EmptyDescriptionException("deadline task");
         }
 
-        // Ie. 2nd half doesn't exist.
-        if (instr.length < 2) {
+        //Ie. 2nd half doesn't exist.
+        if (parts.length < 2) {
             throw new MonaException.EmptyDeadlineException();
         }
-        String taskName = instr[0].substring(9);
-        String date = instr[1].strip();
+        String taskName = parts[0].substring(9);
+        String date = parts[1].strip();
         return new AddTaskCommand(new Deadline(taskName, date));
     }
 
@@ -144,18 +142,18 @@ public class Parser {
      * @throws MonaException if the input is invalid
      */
     public static AddTaskCommand handleEvent(String message) throws MonaException {
-        String[] instr = message.split(" /from");
-        if (instr[0].strip().equalsIgnoreCase("event")) {
+        String[] parts = message.split(" /from");
+        if (parts[0].strip().equalsIgnoreCase("event")) {
             throw new MonaException.EmptyDescriptionException("event");
         }
-        if (instr.length < 2) {
+        if (parts.length < 2) {
             throw new MonaException.IncompleteDateException();
         }
-        String[] dates = instr[1].split("/to ");
+        String[] dates = parts[1].split("/to ");
         if (dates.length < 2 || dates[0].isBlank() || dates[1].isBlank()) {
             throw new MonaException.IncompleteDateException();
         }
-        String taskName = instr[0].substring(6);
+        String taskName = parts[0].substring(6);
         String from = dates[0].strip();
         String to = dates[1].strip();
         return new AddTaskCommand(new Event(taskName, from, to));
@@ -169,16 +167,16 @@ public class Parser {
      * @throws MonaException if the input is invalid
      */
     public static DeleteCommand handleDelete(String message) throws MonaException {
-        String[] instr = message.split(" ");
-        if (instr.length != 2) {
+        String[] parts = message.split(" ");
+        if (parts.length != 2) {
             throw new MonaException.EmptyTaskNumberException();
         }
         try {
-            int index = Integer.parseInt(instr[1]) - 1;
+            int index = Integer.parseInt(parts[1]) - 1;
             return new DeleteCommand(index);
 
         } catch (NumberFormatException e) {
-            throw new MonaException.InvalidTaskNumberException(instr[1]);
+            throw new MonaException.InvalidTaskNumberException(parts[1]);
         }
     }
 }
