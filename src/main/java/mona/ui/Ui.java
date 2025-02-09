@@ -39,7 +39,7 @@ public class Ui {
     }
 
     public void showDeleteTask(int index, Task task, int taskSize) {
-        System.out.printf("task.Task #%d has been erased from existence, Joker!\n", index + 1);
+        System.out.printf("Task #%d has been erased from existence, Joker!\n", index + 1);
         System.out.printf(" %s\nwon't be bothering us anymore!\n", task);
         System.out.printf("Don't forget, you have %d tasks now.\n", taskSize);
     }
@@ -61,7 +61,7 @@ public class Ui {
     }
 
     public void showUnmarkMessage(Task task) {
-        System.out.println("What?! Come on, Joker...!");
+        System.out.println("What?! You changed your mind, Joker...?!");
         System.out.println(task);
     }
 }
