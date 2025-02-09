@@ -72,8 +72,8 @@ public class MonaException extends Exception{
 
     public static class CorruptedFileException extends MonaException {
         public CorruptedFileException() {
-            super("Mrow?! This save file is a total mess! Looks like it's corrupted, Joker!" +
-                    " I'll have to start fresh.");
+            super("Mrow?! This save file is a total mess! Looks like it's corrupted, Joker!\n" +
+                    "I'll have to start fresh.");
         }
     }
 
@@ -84,13 +84,13 @@ public class MonaException extends Exception{
     }
     public static class TaskAlreadyDoneException extends MonaException {
         public TaskAlreadyDoneException(Task task) {
-            super("Hey! It's already done!!\n%s".formatted(task));
+            super("Hey! It's already done!! No need to mark it again!\n%s".formatted(task));
         }
     }
 
     public static class TaskAlreadyUndoneException extends MonaException {
         public TaskAlreadyUndoneException(Task task) {
-            super("Hey! Did you forget or something?!\n%s".formatted(task));
+            super("Hey! Did you forget or something?! This task is already incomplete!\n%s".formatted(task));
         }
     }
 }
