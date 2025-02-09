@@ -3,6 +3,7 @@ package mona.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,7 +30,10 @@ public class Storage {
     public Storage(String filepath) {
         this.directory = DEFAULT_DIRECTORY;
         String[] filepathSplit = filepath.split("/");
-        this.data = new File(DEFAULT_DIRECTORY, filepathSplit[1]);
+
+        // If the filepath is empty, use the default filename
+        String filename = filepathSplit.length > 1 ? filepathSplit[1] : "Mona.txt";
+        this.data = new File(DEFAULT_DIRECTORY, filename);
     }
     public ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>(100);
@@ -110,9 +114,7 @@ public class Storage {
 
     private void resetFile() {
         try {
-            if (data.exists()) {
-                data.delete(); // Delete the corrupted file
-            }
+            Files.deleteIfExists(data.toPath());
             data.createNewFile(); // Create a fresh new file
         } catch (IOException e) {
             System.out.println("Gah! I tried resetting, but I got this error: \"" + e.getMessage() + "\"!");

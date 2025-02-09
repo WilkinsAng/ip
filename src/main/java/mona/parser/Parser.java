@@ -64,6 +64,10 @@ public class Parser {
     }
 
     public static AddTaskCommand handleTodo(String message) throws MonaException {
+        if (message.length() <= 5) {
+            throw new MonaException.EmptyDescriptionException("todo");
+        }
+
         String taskName = message.substring(5);
 
         if (taskName.isBlank()) {
