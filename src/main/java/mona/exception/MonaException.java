@@ -30,34 +30,40 @@ public class MonaException extends Exception {
     }
 
     /**
-     * Exception thrown when the 'mark' command is used without a task number.
+     * Exception thrown when a task number is expected but not provided.
      */
-    public static class EmptyMarkException extends MonaException {
+    public static class EmptyTaskNumberException extends MonaException {
 
         /**
-         * Constructs a new EmptyMarkException.
+         * Constructs a new EmptyTaskNumberException with the specified command.
+         *
+         * @param command The command that requires a task number.
          */
-        public EmptyMarkException() {
+        public EmptyTaskNumberException(String command) {
             super("Eh?! You didn't give me a task number! Try again and give me a valid number!\n" +
-                    "Write in this format: mark <number>");
+                    "Write in this format: %s <number>".formatted(command));
         }
     }
 
     /**
-     * Exception thrown when a task is created without a description.
+     * This exception is thrown when a description is required for a command but
+     * is not provided.
      */
     public static class EmptyDescriptionException extends MonaException {
-
         /**
-         * Constructs a new EmptyDescriptionException with the specified task type.
+         * Constructs a new {@code EmptyDescriptionException} with the specified
+         * command.
          *
-         * @param taskType the type of task.
+         * @param command The command that requires a description.
          */
-        public EmptyDescriptionException(String taskType) {
-            super(("C'mon, Joker! You forgot to tell me what the %s is! " +
+        public EmptyDescriptionException(String command) {
+            super(((command.equals("find")
+                    ? "C'mon, Joker! You forgot to tell me what to find! "
+                    : "C'mon, Joker! You forgot to tell me what the %s is! ") +
+
                     "I may be amazing, but I can't read minds!\n" +
                     "Write in this format: %s <description>")
-                    .formatted(taskType, taskType));
+                    .formatted(command, command));
         }
     }
 
@@ -120,19 +126,6 @@ public class MonaException extends Exception {
         public InvalidTaskNumberException(String number) {
             super("Whoa Joker! /%s/ is not a valid task number! Try again and give me a valid number!"
                     .formatted(number));
-        }
-    }
-
-    /**
-     * Exception thrown when the 'delete' command is used without a task number.
-     */
-    public static class EmptyTaskNumberException extends MonaException {
-
-        /**
-         * Constructs a new EmptyTaskNumberException.
-         */
-        public EmptyTaskNumberException() {
-            super("Huh?! Delete what, Joker? You gotta give me a task number, not just 'delete'!");
         }
     }
 

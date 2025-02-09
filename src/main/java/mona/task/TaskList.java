@@ -71,4 +71,24 @@ public class TaskList {
     public int getSize() {
         return tasks.size();
     }
+
+    /**
+     * Returns a list of tasks that match the given search query.
+     *
+     * The match is case-insensitive and matches if the query string is a substring of the task description.
+     *
+     * @param query The search query to match.
+     * @return A list of tasks that match the query.
+     */
+    public ArrayList<Task> findResults(String query) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task: tasks) {
+            String des = task.description.toLowerCase();
+            query = query.toLowerCase();
+            if (des.contains(query)) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
 }

@@ -13,6 +13,7 @@ public enum Commands {
     MARK,
     UNMARK,
     LIST,
+    FIND,
     BYE;
     
     /**

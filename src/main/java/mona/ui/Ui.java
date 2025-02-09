@@ -47,7 +47,7 @@ public class Ui {
 
     /**
      * Reads a command from the user.
-     * 
+     *
      * @return The command entered by the user.
      */
     public String readCommand() {
@@ -56,7 +56,7 @@ public class Ui {
 
     /**
      * Displays a message when a task is added.
-     * 
+     *
      * @param task    The task that has been added.
      * @param tasksSize The size of the task list.
      */
@@ -67,7 +67,7 @@ public class Ui {
 
     /**
      * Displays a message when a task is deleted.
-     * 
+     *
      * @param index   The index of the task in the task list.
      * @param task    The task that has been deleted.
      * @param taskSize The size of the task list.
@@ -80,7 +80,7 @@ public class Ui {
 
     /**
      * Displays all tasks currently in the list.
-     * 
+     *
      * @param tasks The task list to be displayed.
      */
     public void showAllTasks(ArrayList<Task> tasks) {
@@ -94,9 +94,29 @@ public class Ui {
         }
     }
 
+
+    /**
+     * Displays the results of a search query on the task list.
+     *
+     * @param tasks The list of tasks that match the search query.
+     * @param query The search query entered by the user.
+     */
+    public void showFindResults(ArrayList<Task> tasks, String query) {
+        if (tasks.isEmpty()) {
+            System.out.printf("Mrrrow?! '%s'? I don’t see anything like that in your list, Joker! \n" +
+                    "Maybe you should actually write it down first, huh?\n", query);
+        } else {
+            System.out.printf("HaHA! A flawless search, executed purrfectly!\n" +
+                    "Here are the results for '%s', Joker!:\n", query);
+            for (int i = 1; i <= tasks.size(); i++) {
+                System.out.println(i + ": " + tasks.get(i - 1));
+            }
+        }
+    }
+
     /**
      * Displays a message when a task is marked as completed.
-     * 
+     *
      * @param task The task that has been marked as done.
      */
     public void showMarkMessage(Task task) {
@@ -106,7 +126,7 @@ public class Ui {
 
     /**
      * Displays a message when a task is marked as incomplete.
-     * 
+     *
      * @param task The task that has been marked as undone.
      */
     public void showUnmarkMessage(Task task) {

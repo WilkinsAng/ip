@@ -5,6 +5,7 @@ import mona.command.ByeCommand;
 import mona.command.Command;
 import mona.command.Commands;
 import mona.command.DeleteCommand;
+import mona.command.FindCommand;
 import mona.command.ListCommand;
 import mona.command.MarkCommand;
 import mona.command.UnmarkCommand;
@@ -42,6 +43,8 @@ public class Parser {
             return handleEvent(message);
         case DELETE:
             return handleDelete(message);
+        case FIND:
+            return handleFind(splitMsg);
         case BYE:
             return createByeCommand();
         default:
@@ -76,7 +79,7 @@ public class Parser {
      */
     public static Command handleMark(String[] parts) throws MonaException {
         if (parts.length != 2) {
-            throw new MonaException.EmptyMarkException();
+            throw new MonaException.EmptyTaskNumberException("mark");
         }
         try {
             int index = Integer.parseInt(parts[1]) - 1;
@@ -169,7 +172,7 @@ public class Parser {
     public static DeleteCommand handleDelete(String message) throws MonaException {
         String[] parts = message.split(" ");
         if (parts.length != 2) {
-            throw new MonaException.EmptyTaskNumberException();
+            throw new MonaException.EmptyTaskNumberException("delete");
         }
         try {
             int index = Integer.parseInt(parts[1]) - 1;
@@ -178,5 +181,13 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new MonaException.InvalidTaskNumberException(parts[1]);
         }
+    }
+
+    public static FindCommand handleFind(String[] parts) throws MonaException {
+        if (parts.length < 2 || parts[1].isBlank()) {
+            throw new MonaException.EmptyDescriptionException("find");
+        }
+        String query = parts[1];
+        return new FindCommand(query);
     }
 }
