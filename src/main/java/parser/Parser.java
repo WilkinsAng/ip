@@ -5,6 +5,7 @@ import command.ByeCommand;
 import command.Command;
 import command.Commands;
 import command.DeleteCommand;
+import command.FindCommand;
 import command.ListCommand;
 import command.MarkCommand;
 import command.UnmarkCommand;
@@ -32,6 +33,8 @@ public class Parser {
             return handleEvent(message);
         case DELETE:
             return handleDelete(message);
+        case FIND:
+            return handleFind(splitMsg);
         case BYE:
             return handleBye();
         default:
@@ -49,7 +52,7 @@ public class Parser {
 
     public static Command handleMark(String[] parts) throws MonaException {
         if (parts.length != 2) {
-            throw new MonaException.EmptyMarkException();
+            throw new MonaException.EmptyTaskNumberException("mark");
         }
         try {
             int index = Integer.parseInt(parts[1]) - 1;
@@ -115,7 +118,7 @@ public class Parser {
     public static DeleteCommand handleDelete(String message) throws MonaException {
         String[] instr = message.split(" ");
         if (instr.length != 2) {
-            throw new MonaException.EmptyTaskNumberException();
+            throw new MonaException.EmptyTaskNumberException("delete");
         }
         try {
             int index = Integer.parseInt(instr[1]) - 1;
@@ -124,5 +127,13 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new MonaException.InvalidTaskNumberException(instr[1]);
         }
+    }
+
+    public static FindCommand handleFind(String[] parts) throws MonaException {
+       if (parts.length < 2 || parts[1].isBlank()) {
+           throw new MonaException.EmptyDescriptionException("find");
+       }
+       String query = parts[1];
+       return new FindCommand(query);
     }
 }

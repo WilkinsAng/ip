@@ -55,6 +55,19 @@ public class Ui {
         }
     }
 
+    public void showFindResults(ArrayList<Task> tasks, String query) {
+        if (tasks.isEmpty()) {
+            System.out.printf("Mrrrow?! '%s'? I don’t see anything like that in your list, Joker! \n" +
+                    "Maybe you should actually write it down first, huh?\n", query);
+        } else {
+            System.out.printf("HaHA! A flawless search, executed purrfectly!\n" +
+                    "Here are the results for '%s', Joker!:\n", query);
+            for (int i = 1; i <= tasks.size(); i++) {
+                System.out.println(i + ": " + tasks.get(i - 1));
+            }
+        }
+    }
+
     public void showMarkMessage(Task task) {
         System.out.println("All right, Joker! Very smooth!");
         System.out.println(task);

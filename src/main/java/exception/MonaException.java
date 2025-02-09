@@ -16,18 +16,21 @@ public class MonaException extends Exception{
         }
     }
 
-    public static class EmptyMarkException extends MonaException {
-        public EmptyMarkException() {
-            super("Eh?! You didn't give me a task number! Try again and give me a valid number!\n" +
-                    "Write in this format: mark <number>");
+    public static class EmptyTaskNumberException extends MonaException {
+        public EmptyTaskNumberException(String command) {
+            super(("Eh?! You didn't give me a task number! Try again and give me a valid number!\n" +
+                    "Write in this format: %s <number>").formatted(command));
         }
     }
     public static class EmptyDescriptionException extends MonaException {
-        public EmptyDescriptionException(String taskType) {
-            super(("C'mon, Joker! You forgot to tell me what the %s is! " +
+        public EmptyDescriptionException(String command) {
+            super(((command.equals("find")
+                    ? "C'mon, Joker! You forgot to tell me what to find! "
+                    :"C'mon, Joker! You forgot to tell me what the %s is! ") +
+
                     "I may be amazing, but I can't read minds!\n" +
                     "Write in this format: %s <description>")
-                    .formatted(taskType, taskType));
+                    .formatted(command, command));
         }
     }
 
@@ -61,12 +64,6 @@ public class MonaException extends Exception{
         public InvalidTaskNumberException(String number) {
             super("Whoa Joker! /%s/ is not a valid task number! Try again and give me a valid number!"
                     .formatted(number));
-        }
-    }
-
-    public static class EmptyTaskNumberException extends MonaException {
-        public EmptyTaskNumberException() {
-        super("Huh?! Delete what, Joker? You gotta give me a task number, not just 'delete'!");
         }
     }
 

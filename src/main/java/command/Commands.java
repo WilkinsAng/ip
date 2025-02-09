@@ -10,6 +10,7 @@ public enum Commands {
     MARK,
     UNMARK,
     LIST,
+    FIND,
     BYE;
 
     public static Commands fromString(String command) throws MonaException {
