@@ -14,7 +14,7 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void addList(Task task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
 

@@ -22,7 +22,7 @@ public class UnmarkCommand extends Command {
 
         Task task = tasks.getTask(taskIndex);
 
-        if (task.getIsDone()){
+        if (task.isDone()){
             task.markAsUndone();
         } else {
             throw new MonaException.TaskAlreadyUndoneException(task);

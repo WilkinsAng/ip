@@ -22,7 +22,7 @@ public class MarkCommand extends Command {
 
         Task task = tasks.getTask(taskIndex);
 
-        if (!task.getIsDone()) {
+        if (!task.isDone()) {
             task.markAsDone();
         } else {
             throw new MonaException.TaskAlreadyDoneException(task);

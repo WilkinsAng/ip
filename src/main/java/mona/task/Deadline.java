@@ -24,6 +24,8 @@ public class Deadline extends TimedTask {
 
     @Override
     public String toSaveFormat() {
-        return "D | %s | %s | %s".formatted(isDone ? "1" : "0", description, doneBy.format(TimedTask.INPUT_FORMATTER));
+        String status = isDone ? "1" : "0";
+        String formattedDate = doneBy.format(TimedTask.INPUT_FORMATTER);
+        return "D | %s | %s | %s".formatted(status, description, formattedDate);
     }
 }

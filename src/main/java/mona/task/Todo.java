@@ -17,6 +17,7 @@ public class Todo extends Task {
 
     @Override
     public String toSaveFormat() {
-        return "T | %s | %s".formatted(isDone ? "1" : "0", description);
+        String status = isDone ? "1" : "0";
+        return "T | %s | %s".formatted(status, description);
     }
 }

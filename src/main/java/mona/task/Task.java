@@ -22,7 +22,7 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    public boolean getIsDone() {
+    public boolean isDone() {
         return isDone;
     }
 
