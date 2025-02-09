@@ -1,3 +1,6 @@
+/**
+ * Parses user input into commands.
+ */
 package parser;
 
 import command.AddTaskCommand;
@@ -13,8 +16,18 @@ import task.Deadline;
 import task.Event;
 import task.Todo;
 
+/**
+ * Parses user input messages and converts them into executable commands.
+ */
 public class Parser {
 
+    /**
+     * Parses a user input message and returns the corresponding command.
+     *
+     * @param message The user input message.
+     * @return The corresponding {@code Command} object.
+     * @throws MonaException If the input message is invalid.
+     */
     public static Command parse(String message) throws MonaException {
         String[] splitMsg = message.split(" ");
         Commands command = Commands.fromString(splitMsg[0]);
@@ -39,14 +52,31 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a command to list all tasks.
+     * 
+     * @return a new {@link ListCommand}
+     */
     public static ListCommand printList() {
         return new ListCommand();
     }
 
+    /**
+     * Creates a command to exit the program.
+     * 
+     * @return a new {@link ByeCommand}
+     */
     public static ByeCommand handleBye() {
         return new ByeCommand();
     }
 
+    /**
+     * Handles marking or unmarking a task.
+     * 
+     * @param parts The user input split into words.
+     * @return a new {@link MarkCommand} or an {@link UnmarkCommand}
+     * @throws MonaException if the input is invalid
+     */
     public static Command handleMark(String[] parts) throws MonaException {
         if (parts.length != 2) {
             throw new MonaException.EmptyMarkException();
@@ -63,8 +93,13 @@ public class Parser {
         }
     }
 
-    // Cleaned up code by standardizing variable names, removing debugging statements, improving readability, and more.
-
+    /**
+     * Handles adding a new Todo task.
+     * 
+     * @param message The user input message.
+     * @return a new {@link AddTaskCommand} for a {@link Todo}
+     * @throws MonaException if the input is invalid
+     */
     public static AddTaskCommand handleTodo(String message) throws MonaException {
         if (message.length() < 6) {
             throw new MonaException.EmptyDescriptionException("todo");
@@ -77,15 +112,22 @@ public class Parser {
         return new AddTaskCommand(new Todo(taskName));
     }
 
+    /**
+     * Handles adding a new Deadline task.
+     *
+     * @param message The user input message.
+     * @return a new {@link AddTaskCommand} for a {@link Deadline}
+     * @throws MonaException if the input is invalid
+     */
     public static AddTaskCommand handleDeadline(String message) throws MonaException {
         String[] instr = message.split(" /by");
 
-        //If the first part is just the word "deadline", then there is no description.
+        // If the first part is just the word "deadline", then there is no description.
         if (instr[0].strip().equalsIgnoreCase("deadline")) {
             throw new MonaException.EmptyDescriptionException("deadline task");
         }
 
-        //Ie. 2nd half doesn't exist.
+        // Ie. 2nd half doesn't exist.
         if (instr.length < 2) {
             throw new MonaException.EmptyDeadlineException();
         }
@@ -94,6 +136,13 @@ public class Parser {
         return new AddTaskCommand(new Deadline(taskName, date));
     }
 
+    /**
+     * Handles adding a new Event task.
+     *
+     * @param message The user input message.
+     * @return a new {@link AddTaskCommand} for an {@link Event}
+     * @throws MonaException if the input is invalid
+     */
     public static AddTaskCommand handleEvent(String message) throws MonaException {
         String[] instr = message.split(" /from");
         if (instr[0].strip().equalsIgnoreCase("event")) {
@@ -112,6 +161,13 @@ public class Parser {
         return new AddTaskCommand(new Event(taskName, from, to));
     }
 
+    /**
+     * Handles deleting a task from the list.
+     *
+     * @param message The user input message.
+     * @return a new {@link DeleteCommand}
+     * @throws MonaException if the input is invalid
+     */
     public static DeleteCommand handleDelete(String message) throws MonaException {
         String[] instr = message.split(" ");
         if (instr.length != 2) {
