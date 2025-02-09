@@ -5,45 +5,84 @@ import java.util.Scanner;
 
 import task.Task;
 
+
+/**
+ * Handles user interactions, including displaying messages and reading user input.
+ */
 public class Ui {
     private static final String NEXT_LINE = "---------------------------------------------------------------------";
 
     private Scanner input;
 
+    /**
+     * Creates a new user interface with input handling.
+     */
     public Ui() {
         input = new Scanner(System.in);
     }
 
+    /**
+     * Displays the greeting message.
+     */
     public void greet() {
         System.out.println("What's up, Joker? What are we going to do today?");
         System.out.println(NEXT_LINE);
     }
 
+    /**
+     * Displays the farewell message and closes the input scanner.
+     */
     public void bye() {
         input.close();
         System.out.println("We should get ready for tomorrow. Goodnight, Joker. Meowww.");
         System.out.print(NEXT_LINE);
     }
 
+    /**
+     * Prints a line separator to the user.
+     */
     public void nextLine() {
         System.out.println(NEXT_LINE);
     }
 
+    /**
+     * Reads a command from the user.
+     * 
+     * @return The command entered by the user.
+     */
     public String readCommand() {
         return input.nextLine();
     }
 
+    /**
+     * Displays a message when a task is added.
+     * 
+     * @param task    The task that has been added.
+     * @param tasksSize The size of the task list.
+     */
     public void showAddTask(Task task, int tasksSize) {
         System.out.printf("Okie Joker, I'll help you remember to:\n %s.\n", task.toString());
         System.out.printf("Don't forget, you have %d tasks now.\n", tasksSize);
     }
 
+    /**
+     * Displays a message when a task is deleted.
+     * 
+     * @param index   The index of the task in the task list.
+     * @param task    The task that has been deleted.
+     * @param taskSize The size of the task list.
+     */
     public void showDeleteTask(int index, Task task, int taskSize) {
         System.out.printf("task.Task #%d has been erased from existence, Joker!\n", index + 1);
         System.out.printf(" %s\nwon't be bothering us anymore!\n", task);
         System.out.printf("Don't forget, you have %d tasks now.\n", taskSize);
     }
 
+    /**
+     * Displays all tasks currently in the list.
+     * 
+     * @param tasks The task list to be displayed.
+     */
     public void showAllTasks(ArrayList<Task> tasks) {
         System.out.println("Alright Joker, here is what you need to do:");
         if (tasks.isEmpty()) {
@@ -55,11 +94,21 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays a message when a task is marked as completed.
+     * 
+     * @param task The task that has been marked as done.
+     */
     public void showMarkMessage(Task task) {
         System.out.println("All right, Joker! Very smooth!");
         System.out.println(task);
     }
 
+    /**
+     * Displays a message when a task is marked as incomplete.
+     * 
+     * @param task The task that has been marked as undone.
+     */
     public void showUnmarkMessage(Task task) {
         System.out.println("What?! Come on, Joker...!");
         System.out.println(task);

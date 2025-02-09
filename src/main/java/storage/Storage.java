@@ -13,6 +13,9 @@ import task.Task;
 import task.TaskList;
 import task.Todo;
 
+/**
+ * Handles loading and saving tasks to a local file for persistence.
+ */
 public class Storage {
 
     private static final File DEFAULT_DIRECTORY = new File("./data");
@@ -21,16 +24,30 @@ public class Storage {
     private final File directory;
     private final File data;
 
+    /**
+     * Constructor for Storage object using the default file path.
+     */
     public Storage() {
         this.directory = DEFAULT_DIRECTORY;
         this.data = DEFAULT_DATA;
     }
 
+    /**
+     * Constructor for Storage object with a custom file path.
+     * 
+     * @param filepath The filepath to use for storing tasks.
+     */
     public Storage(String filepath) {
         this.directory = DEFAULT_DIRECTORY;
         String[] filepathSplit = filepath.split("/");
         this.data = new File(DEFAULT_DIRECTORY, filepathSplit[1]);
     }
+
+    /**
+     * Loads tasks from file.
+     * 
+     * @return A list of tasks retrieved from storage.
+     */
     public ArrayList<Task> loadData() {
         ArrayList<Task> tasks = new ArrayList<>(100);
         try {
@@ -91,6 +108,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the current list of tasks to the file.
+     * 
+     * @param tasks The task list to be saved.
+     */
     public void saveData(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(data);
@@ -108,6 +130,9 @@ public class Storage {
 
     }
 
+    /**
+     * Resets the file to a blank state in case of corruption.
+     */
     private void resetFile() {
         try {
             if (data.exists()) {
