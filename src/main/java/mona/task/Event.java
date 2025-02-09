@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import mona.exception.MonaException;
 
 /**
- * Represents an event task with a start and end date/time.
+ * Represents an event task with a start and end date & time.
  */
 public class Event extends TimedTask {
     protected LocalDateTime startFrom;
