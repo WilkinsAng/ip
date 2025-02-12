@@ -1,5 +1,8 @@
 package mona.parser;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import mona.command.AddTaskCommand;
 import mona.command.ByeCommand;
 import mona.command.Command;
@@ -194,7 +197,12 @@ public class Parser {
         if (parts.length < 2 || parts[1].isBlank()) {
             throw new MonaException.EmptyDescriptionException("find");
         }
-        String query = parts[1];
-        return new FindCommand(query);
+        ArrayList<String> queries = new ArrayList<>();
+        for (String part : parts) {
+            if (!part.equals(parts[0])) {
+                queries.add(part);
+            }
+        }
+        return new FindCommand(queries.toArray(new String[0]));
     }
 }

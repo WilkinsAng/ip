@@ -13,15 +13,15 @@ import mona.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    private final String query;
+    private final String[] queries;
 
     /**
      * Constructor.
      *
-     * @param query The search query to match.
+     * @param queries The search query to match.
      */
-    public FindCommand(String query) {
-        this.query = query;
+    public FindCommand(String ... queries) {
+        this.queries = queries;
     }
 
     /**
@@ -34,7 +34,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
-        ArrayList<Task> results = tasks.findResults(query);
-        setReply(ui.showFindResults(results, query));
+        ArrayList<Task> results = tasks.findResults(queries);
+        setReply(ui.showFindResults(results, queries));
     }
 }
