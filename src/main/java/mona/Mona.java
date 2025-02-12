@@ -1,3 +1,5 @@
+package mona;
+
 import mona.command.Command;
 import mona.exception.MonaException;
 import mona.parser.Parser;

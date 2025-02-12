@@ -12,7 +12,7 @@ public class AddTaskCommand extends Command {
     private Task task;
 
     /**
-     *Creates a new command that adds the given task to the task list.
+     * Creates a new command that adds the given task to the task list.
      *
      * @param task the task to be added to the task list
      */
@@ -22,7 +22,7 @@ public class AddTaskCommand extends Command {
     }
 
     /**
-     *Executes the command by adding the task to the task list,
+     * Executes the command by adding the task to the task list,
      * saving the updated list to storage, and displaying feedback to the user.
      *
      * @param tasks The task list to which the task will be added.

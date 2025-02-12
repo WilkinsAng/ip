@@ -128,7 +128,7 @@ public class Parser {
             throw new MonaException.EmptyDescriptionException("deadline task");
         }
 
-        //Ie. 2nd half doesn't exist.
+        //i.e. 2nd half doesn't exist.
         if (parts.length < 2) {
             throw new MonaException.EmptyDeadlineException();
         }
@@ -183,6 +183,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles finding tasks in the task list by keyword.
+     *
+     * @param parts The user input split into words.
+     * @return a new {@link FindCommand}
+     * @throws MonaException if the input is invalid
+     */
     public static FindCommand handleFind(String[] parts) throws MonaException {
         if (parts.length < 2 || parts[1].isBlank()) {
             throw new MonaException.EmptyDescriptionException("find");
