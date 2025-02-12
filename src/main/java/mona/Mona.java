@@ -50,12 +50,7 @@ public class Mona {
         }
     }
 
-    /**
-     * The entry point of the application.
-     *
-     * @param args Command line arguments (not used).
-     */
-    public static void main(String[] args) {
-        new Mona("data/Mona.txt").run();
+    public String getResponse(String input) {
+        return "Hello World";
     }
 }
