@@ -1,8 +1,8 @@
 package mona.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import mona.exception.MonaException;
 import mona.task.Task;
 
 
@@ -10,48 +10,20 @@ import mona.task.Task;
  * Handles user interactions, including displaying messages and reading user input.
  */
 public class Ui {
-    private static final String NEXT_LINE = "---------------------------------------------------------------------";
-
-    private Scanner input;
-
-    /**
-     * Creates a new user interface with input handling.
-     */
-    public Ui() {
-        input = new Scanner(System.in);
-    }
 
     /**
      * Displays the greeting message.
      */
-    public void greet() {
-        System.out.println("What's up, Joker? What are we going to do today?");
-        System.out.println(NEXT_LINE);
+    public static String greet() {
+        return "What's up, Joker? What are we going to do today?";
     }
 
     /**
      * Displays the farewell message and closes the input scanner.
      */
-    public void bye() {
-        input.close();
-        System.out.println("We should get ready for tomorrow. Goodnight, Joker. Meowww.");
-        System.out.print(NEXT_LINE);
-    }
-
-    /**
-     * Prints a line separator to the user.
-     */
-    public void nextLine() {
-        System.out.println(NEXT_LINE);
-    }
-
-    /**
-     * Reads a command from the user.
-     *
-     * @return The command entered by the user.
-     */
-    public String readCommand() {
-        return input.nextLine();
+    public String bye() {
+        return "We should get ready for tomorrow. Goodnight, Joker. Meowww.\n"
+                + "You can close me now!";
     }
 
     /**
@@ -60,9 +32,9 @@ public class Ui {
      * @param task    The task that has been added.
      * @param tasksSize The size of the task list.
      */
-    public void showAddTask(Task task, int tasksSize) {
-        System.out.printf("Okie Joker, I'll help you remember to:\n %s.\n", task.toString());
-        System.out.printf("Don't forget, you have %d tasks now.\n", tasksSize);
+    public String showAddTask(Task task, int tasksSize) {
+        return String.format("Okie Joker, I'll help you remember to:\n %s.\n", task.toString())
+            + String.format("Don't forget, you have %d tasks now.\n", tasksSize);
     }
 
     /**
@@ -72,10 +44,10 @@ public class Ui {
      * @param task    The task that has been deleted.
      * @param taskSize The size of the task list.
      */
-    public void showDeleteTask(int index, Task task, int taskSize) {
-        System.out.printf("Task #%d has been erased from existence, Joker!\n", index + 1);
-        System.out.printf(" %s\nwon't be bothering us anymore!\n", task);
-        System.out.printf("Don't forget, you have %d tasks now.\n", taskSize);
+    public String showDeleteTask(int index, Task task, int taskSize) {
+        return String.format("Task #%d has been erased from existence, Joker!\n", index + 1)
+                + String.format(" %s\nwon't be bothering us anymore!\n", task)
+                + String.format("Don't forget, you have %d tasks now.\n", taskSize);
     }
 
     /**
@@ -83,17 +55,17 @@ public class Ui {
      *
      * @param tasks The task list to be displayed.
      */
-    public void showAllTasks(ArrayList<Task> tasks) {
-        System.out.println("Alright Joker, here is what you need to do:");
+    public String showAllTasks(ArrayList<Task> tasks) {
+        StringBuilder result = new StringBuilder("Alright Joker, here is what you need to do:\n");
         if (tasks.isEmpty()) {
-            System.out.println("Waittt, you didn't tell me anything!!");
+            result.append("Waittt, you didn't tell me anything!!");
         } else {
             for (int i = 1; i <= tasks.size(); i++) {
-                System.out.println(i + ": " + tasks.get(i - 1));
+                result.append(i).append(": ").append(tasks.get(i - 1)).append("\n");
             }
         }
+        return result.toString();
     }
-
 
     /**
      * Displays the results of a search query on the task list.
@@ -101,16 +73,17 @@ public class Ui {
      * @param tasks The list of tasks that match the search query.
      * @param query The search query entered by the user.
      */
-    public void showFindResults(ArrayList<Task> tasks, String query) {
+    public String showFindResults(ArrayList<Task> tasks, String query) {
         if (tasks.isEmpty()) {
-            System.out.printf("Mrrrow?! '%s'? I don’t see anything like that in your list, Joker! \n" +
-                    "Maybe you should actually write it down first, huh?\n", query);
+            return String.format("Mrrrow?! '%s'? I don’t see anything like that in your list, Joker! \n"
+                    + "Maybe you should actually write it down first, huh?\n", query);
         } else {
-            System.out.printf("HaHA! A flawless search, executed purrfectly!\n" +
-                    "Here are the results for '%s', Joker!:\n", query);
+            StringBuilder result = new StringBuilder(String.format("HaHA! A flawless search, executed purrfectly!\n"
+                    + "Here are the results for '%s', Joker!:\n", query));
             for (int i = 1; i <= tasks.size(); i++) {
-                System.out.println(i + ": " + tasks.get(i - 1));
+                result.append(i).append(": ").append(tasks.get(i - 1)).append("\n");
             }
+            return result.toString();
         }
     }
 
@@ -119,9 +92,9 @@ public class Ui {
      *
      * @param task The task that has been marked as done.
      */
-    public void showMarkMessage(Task task) {
-        System.out.println("All right, Joker! Very smooth!");
-        System.out.println(task);
+    public String showMarkMessage(Task task) {
+        return "All right, Joker! Very smooth!\n"
+            + task.toString();
     }
 
     /**
@@ -129,8 +102,18 @@ public class Ui {
      *
      * @param task The task that has been marked as undone.
      */
-    public void showUnmarkMessage(Task task) {
-        System.out.println("What?! You changed your mind, Joker...?!");
-        System.out.println(task);
+    public String showUnmarkMessage(Task task) {
+        return "What?! You changed your mind, Joker...?!\n"
+            + task.toString();
+    }
+
+    /**
+     * Displays an error message.
+     *
+     * @param e The MonaException thrown.
+     * @return The error message.
+     */
+    public String showErrorMessage(MonaException e) {
+        return e.getMessage();
     }
 }

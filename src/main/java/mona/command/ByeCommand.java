@@ -9,6 +9,8 @@ import mona.ui.Ui;
  */
 public class ByeCommand extends Command {
 
+    private String reply;
+
     /**
      * Executes the command by setting the exit flag to true and displaying
      * a goodbye message to the user.
@@ -19,7 +21,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        super.markAsExit();
-        ui.bye();
+        setReply(ui.bye());
     }
 }

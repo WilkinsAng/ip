@@ -15,14 +15,13 @@ public enum Commands {
     LIST,
     FIND,
     BYE;
-    
     /**
      * Converts a string representation of a command into a corresponding {@code Commands} enum.
      *
      * @param command The string representation of the command.
      * @return The corresponding {@code Commands} enum.
      * @throws MonaException.UnknownCommandException If the string does not
-     * correspond to a valid command.
+     *      correspond to a valid command.
      */
     public static Commands fromString(String command) throws MonaException {
         try {

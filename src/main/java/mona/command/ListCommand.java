@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * @throws MonaException If an error occurs while retrieving tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showAllTasks(tasks.getTaskList());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
+        setReply(ui.showAllTasks(tasks.getTaskList()));
     }
 }

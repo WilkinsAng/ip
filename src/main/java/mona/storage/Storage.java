@@ -35,7 +35,6 @@ public class Storage {
 
     /**
      * Constructor for Storage object with a custom file path.
-     * 
      * @param filepath The filepath to use for storing tasks.
      */
     public Storage(String filepath) {
@@ -49,7 +48,6 @@ public class Storage {
 
     /**
      * Loads tasks from file.
-     * 
      * @return A list of tasks retrieved from storage.
      */
     public ArrayList<Task> loadData() {
@@ -114,7 +112,6 @@ public class Storage {
 
     /**
      * Saves the current list of tasks to the file.
-     * 
      * @param tasks The task list to be saved.
      */
     public void saveData(TaskList tasks) {

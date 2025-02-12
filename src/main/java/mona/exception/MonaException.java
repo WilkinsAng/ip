@@ -23,9 +23,9 @@ public class MonaException extends Exception {
          * @param command the unknown command.
          */
         public UnknownCommandException(String command) {
-            super(("MErroW? What kind of command is /%s/? That ain't one of my Phantom Thief tricks, Joker!\n" +
-                    "Check that your input is one of these and try again:" +
-                    "%s").formatted(command, Commands.allCommands()));
+            super(("MErroW? What kind of command is /%s/? That ain't one of my Phantom Thief tricks, Joker!\n"
+                    + "Check that your input is one of these and try again:"
+                    + "%s").formatted(command, Commands.allCommands()));
         }
     }
 
@@ -40,8 +40,8 @@ public class MonaException extends Exception {
          * @param command The command that requires a task number.
          */
         public EmptyTaskNumberException(String command) {
-            super("Eh?! You didn't give me a task number! Try again and give me a valid number!\n" +
-                    "Write in this format: %s <number>".formatted(command));
+            super("Eh?! You didn't give me a task number! Try again and give me a valid number!\n"
+                    + "Write in this format: %s <number>".formatted(command));
         }
     }
 
@@ -59,10 +59,9 @@ public class MonaException extends Exception {
         public EmptyDescriptionException(String command) {
             super(((command.equals("find")
                     ? "C'mon, Joker! You forgot to tell me what to find! "
-                    : "C'mon, Joker! You forgot to tell me what the %s is! ") +
-
-                    "I may be amazing, but I can't read minds!\n" +
-                    "Write in this format: %s <description>")
+                    : "C'mon, Joker! You forgot to tell me what the %s is! ")
+                    + "I may be amazing, but I can't read minds!\n"
+                    + "Write in this format: %s <description>")
                     .formatted(command, command));
         }
     }
@@ -76,9 +75,9 @@ public class MonaException extends Exception {
          * Constructs a new EmptyDeadlineException.
          */
         public EmptyDeadlineException() {
-            super("Wait a sec, Joker! You can't set a deadline without a date! " +
-                    "What, you expecting me to guess? Give me the details!\n" +
-                    "Write in this format: deadline <description> /by <date>");
+            super("Wait a sec, Joker! You can't set a deadline without a date! "
+                    + "What, you expecting me to guess? Give me the details!\n"
+                    + "Write in this format: deadline <description> /by <date>");
         }
     }
 
@@ -91,9 +90,9 @@ public class MonaException extends Exception {
          * Constructs a new IncompleteDateException.
          */
         public IncompleteDateException() {
-            super("Mrrrow?! An event without a full time range?! " +
-                    "Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!\n" +
-                    "Write in this format: event <description> /from <time> /to <time>");
+            super("Mrrrow?! An event without a full time range?! "
+                    + "Even *Mona the Magnificent* can’t work with that! Give me a proper time, Joker!\n"
+                    + "Write in this format: event <description> /from <time> /to <time>");
         }
     }
 
@@ -108,8 +107,8 @@ public class MonaException extends Exception {
          * @param index the index of the task.
          */
         public TaskNotFoundException(int index) {
-            super("Eh?! There is no task #%d! Are you seeing things, Joker?\n".formatted(index) +
-                    "Use /list/ to check your tasks again and give me a valid number!");
+            super("Eh?! There is no task #%d! Are you seeing things, Joker?\n".formatted(index)
+                    + "Use /list/ to check your tasks again and give me a valid number!");
         }
     }
 
@@ -138,8 +137,8 @@ public class MonaException extends Exception {
          * Constructs a new CorruptedFileException.
          */
         public CorruptedFileException() {
-            super("Mrow?! This save file is a total mess! Looks like it's corrupted, Joker!\n" +
-                    " I'll have to start fresh.");
+            super("Mrow?! This save file is a total mess! Looks like it's corrupted, Joker!\n"
+                    + " I'll have to start fresh.");
         }
     }
 

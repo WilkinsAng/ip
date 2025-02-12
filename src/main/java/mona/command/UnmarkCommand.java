@@ -40,13 +40,13 @@ public class UnmarkCommand extends Command {
 
         Task task = tasks.getTask(taskIndex);
 
-        if (task.isDone()){
+        if (task.isDone()) {
             task.markAsUndone();
         } else {
             throw new MonaException.TaskAlreadyUndoneException(task);
         }
 
         storage.saveData(tasks);
-        ui.showUnmarkMessage(task);
+        setReply(ui.showUnmarkMessage(task));
     }
 }

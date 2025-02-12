@@ -46,6 +46,6 @@ public class MarkCommand extends Command {
             throw new MonaException.TaskAlreadyDoneException(task);
         }
         storage.saveData(tasks);
-        ui.showMarkMessage(task);
+        setReply(ui.showMarkMessage(task));
     }
 }
