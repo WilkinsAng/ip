@@ -29,6 +29,13 @@ public class Mona {
     }
 
 
+    /**
+     * Parses the given input and executes the corresponding command,
+     * returning the command's reply message.
+     *
+     * @param input The user input to parse and execute.
+     * @return The reply message associated with the command.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -37,5 +44,14 @@ public class Mona {
         } catch (MonaException e) {
             return ui.showErrorMessage(e);
         }
+    }
+
+    /**
+     * Retrieves the initial greeting message displayed to the user.
+     *
+     * @return The greeting message as a String.
+     */
+    public static String greet() {
+        return Ui.greet();
     }
 }

@@ -10,10 +10,11 @@ import mona.task.Task;
  * Handles user interactions, including displaying messages and reading user input.
  */
 public class Ui {
+
     /**
      * Displays the greeting message.
      */
-    public String greet() {
+    public static String greet() {
         return "What's up, Joker? What are we going to do today?";
     }
 
@@ -21,7 +22,8 @@ public class Ui {
      * Displays the farewell message and closes the input scanner.
      */
     public String bye() {
-        return "We should get ready for tomorrow. Goodnight, Joker. Meowww.";
+        return "We should get ready for tomorrow. Goodnight, Joker. Meowww.\n"
+                + "You can close me now!";
     }
 
     /**
