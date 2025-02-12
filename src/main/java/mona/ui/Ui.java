@@ -71,15 +71,22 @@ public class Ui {
      * Displays the results of a search query on the task list.
      *
      * @param tasks The list of tasks that match the search query.
-     * @param query The search query entered by the user.
+     * @param queries The search query entered by the user.
+     * @return A message to display to the user summarizing the search results.
      */
-    public String showFindResults(ArrayList<Task> tasks, String query) {
+    public String showFindResults(ArrayList<Task> tasks, String... queries) {
+        StringBuilder query = new StringBuilder();
+        for (String q : queries) {
+            query.append('\'').append(q).append('\'').append(", ");
+        }
+        query.setLength(query.length() - 2);
+
         if (tasks.isEmpty()) {
-            return String.format("Mrrrow?! '%s'? I don’t see anything like that in your list, Joker! \n"
+            return String.format("Mrrrow?! %s? I don’t see anything like that in your list, Joker! \n"
                     + "Maybe you should actually write it down first, huh?\n", query);
         } else {
             StringBuilder result = new StringBuilder(String.format("HaHA! A flawless search, executed purrfectly!\n"
-                    + "Here are the results for '%s', Joker!:\n", query));
+                    + "Here are the results for %s, Joker!:\n", query));
             for (int i = 1; i <= tasks.size(); i++) {
                 result.append(i).append(": ").append(tasks.get(i - 1)).append("\n");
             }

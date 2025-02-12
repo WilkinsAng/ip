@@ -73,20 +73,21 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of tasks that match the given search query.
+     * Searches for tasks that contain any of the given keywords in their descriptions.
+     * This method performs a case-insensitive search and returns all matching tasks.
      *
-     * The match is case-insensitive and matches if the query string is a substring of the task description.
-     *
-     * @param query The search query to match.
-     * @return A list of tasks that match the query.
+     * @param queries One or more keywords to search for in task descriptions.
+     * @return An {@code ArrayList} of tasks whose descriptions contain at least one of the given keywords.
      */
-    public ArrayList<Task> findResults(String query) {
+    public ArrayList<Task> findResults(String ... queries) {
         ArrayList<Task> results = new ArrayList<>();
         for (Task task: tasks) {
-            String des = task.description.toLowerCase();
-            query = query.toLowerCase();
-            if (des.contains(query)) {
-                results.add(task);
+            String description = task.description.toLowerCase();
+            for (String query: queries) {
+                if (description.contains(query.toLowerCase())) {
+                    results.add(task);
+                    break;
+                }
             }
         }
         return results;
