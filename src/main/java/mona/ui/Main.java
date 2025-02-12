@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import mona.Mona;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Mona using FXML.
  */
 public class Main extends Application {
 
@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(mona);
+            fxmlLoader.<MainWindow>getController().setMona(mona);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

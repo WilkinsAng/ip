@@ -35,6 +35,6 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
         ArrayList<Task> results = tasks.findResults(query);
-        ui.showFindResults(results, query);
+        setReply(ui.showFindResults(results, query));
     }
 }

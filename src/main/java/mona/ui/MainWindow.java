@@ -32,8 +32,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
-    public void setDuke(Mona m) {
+    /** Injects the Mona instance */
+    public void setMona(Mona m) {
         mona = m;
     }
 
@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
         String response = mona.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getMonaDialog(response, dukeImage)
         );
         userInput.clear();
     }

@@ -47,6 +47,6 @@ public class UnmarkCommand extends Command {
         }
 
         storage.saveData(tasks);
-        ui.showUnmarkMessage(task);
+        setReply(ui.showUnmarkMessage(task));
     }
 }

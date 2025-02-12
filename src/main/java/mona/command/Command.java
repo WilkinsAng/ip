@@ -11,7 +11,7 @@ import mona.ui.Ui;
  */
 public abstract class Command {
 
-    private boolean isExit = false;
+    private String reply;
 
     /**
      * Executes the command, performing necessary actions on the task list, user interface, and storage.
@@ -25,18 +25,20 @@ public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException;
 
     /**
-     * Returns whether the command is an exit command.
+     * Retrieves the reply message associated with the command.
      *
-     * @return {@code true} if the command is an exit command, {@code false} otherwise.
+     * @return The reply message as a String.
      */
-    public boolean isExit() {
-        return this.isExit;
-    }
+    public String getReply() {
+        return reply;
+    };
 
     /**
-     * Sets the command as an exit command.
+     * Sets the reply message associated with the command.
+     *
+     * @param reply The reply message as a String.
      */
-    public void markAsExit() {
-        isExit = true;
+    public void setReply(String reply) {
+        this.reply = reply;
     }
 }

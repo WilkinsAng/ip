@@ -28,29 +28,14 @@ public class Mona {
         tasks = new TaskList(storage.loadData());
     }
 
-    /**
-     * Runs the chatbot, continuously processing user commands until exit.
-     */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (MonaException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                if (!isExit) {
-                    ui.nextLine();
-                }
-            }
-        }
-    }
 
     public String getResponse(String input) {
-        return "Hello World";
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            return c.getReply();
+        } catch (MonaException e) {
+            return ui.showErrorMessage(e);
+        }
     }
 }

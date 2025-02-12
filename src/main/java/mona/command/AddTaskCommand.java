@@ -33,6 +33,6 @@ public class AddTaskCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.saveData(tasks);
-        ui.showAddTask(task, tasks.getSize());
+        setReply(ui.showAddTask(task, tasks.getSize()));
     }
 }
