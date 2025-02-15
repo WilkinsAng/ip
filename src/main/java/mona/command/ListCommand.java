@@ -20,6 +20,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
+        assert ui != null : "Ui should not be null";
         setReply(ui.showAllTasks(tasks.getTaskList()));
     }
 }

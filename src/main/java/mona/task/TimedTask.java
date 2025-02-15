@@ -15,7 +15,7 @@ public abstract class TimedTask extends Task {
     protected static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM d, h:mma");
 
     /**
-     * Construct a new TimedTask with the given description.
+     * Constructs a new TimedTask with the given description.
      *
      * @param description The description of the task.
      */
@@ -24,7 +24,7 @@ public abstract class TimedTask extends Task {
     }
 
     /**
-     * Construct a new TimedTask with the given description and completion status.
+     * Constructs a new TimedTask with the given description and completion status.
      * Used for loading a saved task.
      *
      * @param description The description of the task.
@@ -57,6 +57,7 @@ public abstract class TimedTask extends Task {
      *         or "No date provided" if {@code date} is {@code null}.
      */
     public static String formatDateTime(LocalDateTime date) {
+        assert date != null;
         return date.format(OUTPUT_FORMATTER);
     }
 }
