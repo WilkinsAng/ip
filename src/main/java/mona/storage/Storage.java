@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import mona.exception.MonaException;
-import mona.task.Deadline;
-import mona.task.Event;
+import mona.parser.StorageParser;
 import mona.task.Task;
 import mona.task.TaskList;
-import mona.task.Todo;
 
 /**
  * Handles loading and saving tasks to a local file for persistence.
@@ -69,40 +67,8 @@ public class Storage {
 
             while (contents.hasNextLine()) {
                 String line = contents.nextLine();
-                String[] splitLine = line.split(" \\| ");
-                String command = splitLine[0];
-                boolean isDone = splitLine[1].equals("1");
-                String description = splitLine[2];
-
-                switch (command) {
-                case "T":
-                    if (splitLine.length != 3) {
-                        throw new MonaException.CorruptedFileException();
-                    }
-                    Task task = new Todo(description, isDone);
-                    tasks.add(task);
-                    break;
-                case "D":
-                    if (splitLine.length != 4) {
-                        throw new MonaException.CorruptedFileException();
-                    }
-                    String doneBy = splitLine[3];
-                    Task deadline = new Deadline(description, isDone, doneBy);
-                    tasks.add(deadline);
-                    break;
-                case "E":
-                    if (splitLine.length != 5) {
-                        throw new MonaException.CorruptedFileException();
-                    }
-                    String[] startEnd = splitLine[3].split(" - ");
-                    String startFrom = startEnd[0];
-                    String endBy = startEnd[1];
-                    Task event = new Event(description, isDone, startFrom, endBy);
-                    tasks.add(event);
-                    break;
-                default:
-                    throw new MonaException.CorruptedFileException();
-                }
+                Task taskToAdd = StorageParser.parseToTask(line);
+                tasks.add(taskToAdd);
             }
             contents.close();
         } catch (IOException e) {
