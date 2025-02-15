@@ -1,6 +1,8 @@
 package mona.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Manages a list of tasks, providing methods to add, remove, and retrieve tasks.
@@ -75,23 +77,21 @@ public class TaskList {
     /**
      * Searches for tasks that contain any of the given keywords in their descriptions.
      * This method performs a case-insensitive search and returns all matching tasks.
+     * If no keywords are given, the method returns an empty list.
      *
-     * @param queries One or more keywords to search for in task descriptions.
-     * @return An {@code ArrayList} of tasks whose descriptions contain at least one of the given keywords.
+     * @param queries Zero or more keywords to search for in task descriptions.
+     * @return A {@code ArrayList} of tasks whose descriptions contain at least one of the given keywords.
      */
     public ArrayList<Task> findResults(String ... queries) {
         assert queries != null : "queries should not be null";
 
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task task: tasks) {
-            String description = task.description.toLowerCase();
-            for (String query: queries) {
-                if (description.contains(query.toLowerCase())) {
-                    results.add(task);
-                    break;
-                }
-            }
-        }
-        return results;
+        return tasks.stream()
+                .filter(task -> {
+                    String description = task.description.toLowerCase();
+                    return Arrays.stream(queries)
+                            .map(String::toLowerCase)
+                            .anyMatch(description::contains);
+                })
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
