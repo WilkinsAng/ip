@@ -1,5 +1,6 @@
 package mona.ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import mona.exception.MonaException;
@@ -122,5 +123,28 @@ public class Ui {
      */
     public String showErrorMessage(MonaException e) {
         return e.getMessage();
+    }
+
+    /**
+     * Returns a message to be displayed when an IO error occurs during loading from file.
+     *
+     * @param e The IOException thrown.
+     * @return A message describing the error to the user.
+     */
+    public String showLoadingError(IOException e) {
+        return "Whoa! Looks like a glitch in the system! I got this message: *"
+                + e.getMessage() + "*. Better check the files, Joker!";
+    }
+
+
+    /**
+     * Returns a message to be displayed when an IO error occurs during saving to file.
+     *
+     * @param e The IOException thrown.
+     * @return A message describing the error to the user.
+     */
+    public String showSavingError(IOException e) {
+        return "Whoa! Looks like a something went wrong while saving, Joker! I got this message: *"
+                + e.getMessage();
     }
 }

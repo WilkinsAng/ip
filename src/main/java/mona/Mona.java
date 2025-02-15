@@ -24,7 +24,7 @@ public class Mona {
      */
     public Mona(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(ui, filePath);
         tasks = new TaskList(storage.loadData());
     }
 
