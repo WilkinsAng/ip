@@ -2,6 +2,8 @@ package mona.ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import mona.exception.MonaException;
 import mona.task.Task;
@@ -35,7 +37,7 @@ public class Ui {
      */
     public String showAddTask(Task task, int tasksSize) {
         return String.format("Okie Joker, I'll help you remember to:\n %s.\n", task.toString())
-            + String.format("Don't forget, you have %d tasks now.\n", tasksSize);
+                + String.format("Don't forget, you have %d tasks now.\n", tasksSize);
     }
 
     /**
@@ -57,15 +59,16 @@ public class Ui {
      * @param tasks The task list to be displayed.
      */
     public String showAllTasks(ArrayList<Task> tasks) {
-        StringBuilder result = new StringBuilder("Alright Joker, here is what you need to do:\n");
+        String result = "Alright Joker, here is what you need to do:\n";
+
         if (tasks.isEmpty()) {
-            result.append("Waittt, you didn't tell me anything!!");
-        } else {
-            for (int i = 1; i <= tasks.size(); i++) {
-                result.append(i).append(": ").append(tasks.get(i - 1)).append("\n");
-            }
+            return result + "Waittt, you didn't tell me anything!!";
         }
-        return result.toString();
+
+        return result
+                + IntStream.range(0, tasks.size())
+                .mapToObj(i -> (i + 1) + ": " + tasks.get(i))
+                .collect(Collectors.joining("\n"));
     }
 
     /**
@@ -102,7 +105,7 @@ public class Ui {
      */
     public String showMarkMessage(Task task) {
         return "All right, Joker! Very smooth!\n"
-            + task.toString();
+                + task.toString();
     }
 
     /**
@@ -112,7 +115,7 @@ public class Ui {
      */
     public String showUnmarkMessage(Task task) {
         return "What?! You changed your mind, Joker...?!\n"
-            + task.toString();
+                + task.toString();
     }
 
     /**
