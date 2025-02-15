@@ -43,6 +43,7 @@ public class Deadline extends TimedTask {
      */
     @Override
     public String toString() {
+        assert doneBy != null : "Done by date should not be null";
         return "[D]" + super.toString() + " (by: %s)".formatted(TimedTask.formatDateTime(doneBy));
     }
 
@@ -53,6 +54,7 @@ public class Deadline extends TimedTask {
      */
     @Override
     public String toSaveFormat() {
+        assert doneBy != null : "Done by date should not be null";
         String status = isDone ? "1" : "0";
         String formattedDate = doneBy.format(TimedTask.INPUT_FORMATTER);
         return "D | %s | %s | %s".formatted(status, description, formattedDate);

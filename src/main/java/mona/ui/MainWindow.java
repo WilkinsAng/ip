@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
 
     /** Injects the Mona instance */
     public void setMona(Mona m) {
+        assert m != null : "Mona should not be null";
         mona = m;
     }
 

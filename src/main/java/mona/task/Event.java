@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import mona.exception.MonaException;
 
 /**
- * Represents an event task with a start and end date & time.
+ * Represents an event task with a start and end date and time.
  */
 public class Event extends TimedTask {
     protected LocalDateTime startFrom;
@@ -48,6 +48,7 @@ public class Event extends TimedTask {
      */
     @Override
     public String toString() {
+        assert startFrom != null && endBy != null : "Start and end times should not be null";
         return "[E]" + super.toString() + " (from: %s, to: %s)"
                 .formatted(TimedTask.formatDateTime(startFrom), TimedTask.formatDateTime(endBy));
     }
@@ -59,6 +60,7 @@ public class Event extends TimedTask {
      */
     @Override
     public String toSaveFormat() {
+        assert startFrom != null && endBy != null : "Start and end times should not be null";
         String status = isDone ? "1" : "0";
         String formattedStart = startFrom.format(TimedTask.INPUT_FORMATTER);
         String formattedEnd = endBy.format(TimedTask.INPUT_FORMATTER);
