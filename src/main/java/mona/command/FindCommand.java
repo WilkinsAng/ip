@@ -34,6 +34,9 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+
         ArrayList<Task> results = tasks.findResults(queries);
         setReply(ui.showFindResults(results, queries));
     }

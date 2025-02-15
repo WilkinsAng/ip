@@ -30,6 +30,7 @@ public abstract class Command {
      * @return The reply message as a String.
      */
     public String getReply() {
+        assert reply != null : "Reply should not be null";
         return reply;
     };
 
