@@ -2,6 +2,7 @@ package mona.ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -79,23 +80,22 @@ public class Ui {
      * @return A message to display to the user summarizing the search results.
      */
     public String showFindResults(ArrayList<Task> tasks, String... queries) {
-        StringBuilder query = new StringBuilder();
-        for (String q : queries) {
-            query.append('\'').append(q).append('\'').append(", ");
-        }
-        query.setLength(query.length() - 2);
+        String formattedQueries = Arrays.stream(queries)
+                .map(query -> "'" + query + "'")
+                .collect(Collectors.joining(", "));
 
         if (tasks.isEmpty()) {
             return String.format("Mrrrow?! %s? I don’t see anything like that in your list, Joker! \n"
-                    + "Maybe you should actually write it down first, huh?\n", query);
-        } else {
-            StringBuilder result = new StringBuilder(String.format("HaHA! A flawless search, executed purrfectly!\n"
-                    + "Here are the results for %s, Joker!:\n", query));
-            for (int i = 1; i <= tasks.size(); i++) {
-                result.append(i).append(": ").append(tasks.get(i - 1)).append("\n");
-            }
-            return result.toString();
+                    + "Maybe you should actually write it down first, huh?\n", formattedQueries);
         }
+
+        return String.format(String.format("HaHA! A flawless search, executed purrfectly!\n"
+                        + "Here are the results for %s, Joker!:\n%s",
+                formattedQueries,
+                IntStream.range(0, tasks.size())
+                        .mapToObj(i -> (i + 1) + ": " + tasks.get(i))
+                        .collect(Collectors.joining("\n"))
+        ));
     }
 
     /**
