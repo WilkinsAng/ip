@@ -11,6 +11,7 @@ import mona.exception.MonaException;
 import mona.parser.StorageParser;
 import mona.task.Task;
 import mona.task.TaskList;
+import mona.ui.Ui;
 
 /**
  * Handles loading and saving tasks to a local file for persistence.
@@ -22,11 +23,13 @@ public class Storage {
 
     private final File directory;
     private final File data;
+    private final Ui ui;
 
     /**
      * Constructor for Storage object using the default file path.
      */
     public Storage() {
+        ui = new Ui();
         this.directory = DEFAULT_DIRECTORY;
         this.data = DEFAULT_DATA;
     }
@@ -35,7 +38,8 @@ public class Storage {
      * Constructor for Storage object with a custom file path.
      * @param filepath The filepath to use for storing tasks.
      */
-    public Storage(String filepath) {
+    public Storage(Ui ui, String filepath) {
+        this.ui = ui;
         assert filepath != null && !filepath.isBlank() : "Storage filepath cannot be null or empty";
 
         this.directory = DEFAULT_DIRECTORY;
@@ -51,35 +55,21 @@ public class Storage {
      * @return A list of tasks retrieved from storage.
      */
     public ArrayList<Task> loadData() {
-        ArrayList<Task> tasks = new ArrayList<>(100);
         try {
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            if (!data.exists()) {
-                data.createNewFile();
-            }
+            ensureStorageExist();
 
             assert data.exists() : "Storage file does not exist";
             assert directory.exists() : "Storage directory does not exist";
 
-            Scanner contents = new Scanner(data);
-
-            while (contents.hasNextLine()) {
-                String line = contents.nextLine();
-                Task taskToAdd = StorageParser.parseToTask(line);
-                tasks.add(taskToAdd);
-            }
-            contents.close();
+            return loadTasksFromFile();
         } catch (IOException e) {
-            System.out.println("Whoa! Looks like a glitch in the system! I got this message: *"
-                    + e.getMessage() + "*. Better check the files, Joker!");
+            ui.showLoadingError(e);
+            return new ArrayList<>();
         } catch (MonaException monaException) {
-            System.out.println(monaException.getMessage());
+            ui.showErrorMessage(monaException);
             resetFile();
             return new ArrayList<>();
         }
-        return tasks;
     }
 
     /**
@@ -99,8 +89,7 @@ public class Storage {
             writer.close();
 
         } catch (IOException e) {
-            System.out.println("Whoa! Looks like a something went wrong while saving, Joker! I got this message: *"
-                    + e.getMessage());
+            ui.showSavingError(e);
         }
 
     }
@@ -115,5 +104,38 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Gah! I tried resetting, but I got this error: \"" + e.getMessage() + "\"!");
         }
+    }
+
+    /**
+     * Checks if the storage directory exists and creates it if not.
+     * Ensures the file exists and creates it if it does not.
+     * @throws IOException if unable to create the file or directory
+     */
+    private void ensureStorageExist() throws IOException {
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        if (!data.exists()) {
+            data.createNewFile();
+        }
+    }
+
+    /**
+     * Loads the tasks stored in the file.
+     * @return the list of tasks loaded from the file
+     * @throws IOException if unable to read the file
+     * @throws MonaException if the file is corrupted
+     */
+    private ArrayList<Task> loadTasksFromFile() throws IOException, MonaException {
+        ArrayList<Task> tasks = new ArrayList<>(100);
+        Scanner contents = new Scanner(data);
+
+        while (contents.hasNextLine()) {
+            String line = contents.nextLine();
+            Task taskToAdd = StorageParser.parseToTask(line);
+            tasks.add(taskToAdd);
+        }
+        contents.close();
+        return tasks;
     }
 }
