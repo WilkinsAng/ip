@@ -34,6 +34,10 @@ public class MarkCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
+        assert tasks != null : "TaskList should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         if (taskIndex < 0 || taskIndex >= tasks.getSize()) {
             throw new MonaException.TaskNotFoundException(taskIndex + 1);
         }

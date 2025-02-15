@@ -21,6 +21,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert ui != null : "Ui should not be null";
         setReply(ui.bye());
     }
 }

@@ -39,6 +39,9 @@ public class Mona {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+
+            assert c != null : "Command should not be null";
+
             c.execute(tasks, ui, storage);
             return c.getReply();
         } catch (MonaException e) {

@@ -80,6 +80,8 @@ public class TaskList {
      * @return An {@code ArrayList} of tasks whose descriptions contain at least one of the given keywords.
      */
     public ArrayList<Task> findResults(String ... queries) {
+        assert queries != null : "queries should not be null";
+
         ArrayList<Task> results = new ArrayList<>();
         for (Task task: tasks) {
             String description = task.description.toLowerCase();

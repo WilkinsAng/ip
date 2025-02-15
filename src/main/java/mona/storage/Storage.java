@@ -38,6 +38,8 @@ public class Storage {
      * @param filepath The filepath to use for storing tasks.
      */
     public Storage(String filepath) {
+        assert filepath != null && !filepath.isBlank() : "Storage filepath cannot be null or empty";
+
         this.directory = DEFAULT_DIRECTORY;
         String[] filepathSplit = filepath.split("/");
 
@@ -59,6 +61,10 @@ public class Storage {
             if (!data.exists()) {
                 data.createNewFile();
             }
+
+            assert data.exists() : "Storage file does not exist";
+            assert directory.exists() : "Storage directory does not exist";
+
             Scanner contents = new Scanner(data);
 
             while (contents.hasNextLine()) {
@@ -115,6 +121,8 @@ public class Storage {
      * @param tasks The task list to be saved.
      */
     public void saveData(TaskList tasks) {
+        assert tasks != null : "TaskList should not be null";
+
         try {
             FileWriter writer = new FileWriter(data);
 
