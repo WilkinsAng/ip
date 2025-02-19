@@ -1,12 +1,14 @@
 package mona.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
 import mona.storage.Storage;
 import mona.task.TaskList;
-import mona.ui.Ui;
 import mona.task.Todo;
+import mona.ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddTaskCommandTest {
 
