@@ -16,11 +16,10 @@ Whether you're adding **To-Dos**, setting **Deadlines**, or scheduling **Events*
 5. A GUI will appear. Mona will greet you and is ready to take your commands!
 
 ## Features
-
+*Note: All tasks created are first set to a default priority of `LOW`.*
 ###  Adding a To-Do Task
 Creates a simple task with a description.
 
-*Note: All tasks are set to a default priority of `LOW`.*
 #### **Format:**
 ```plaintext
 todo <Description>
