@@ -10,7 +10,7 @@ public enum TaskPriority {
     MEDIUM(2, "[MEDIUM]"),
     LOW(3, "[LOW]");
 
-    private static Logger logger = Logger.getLogger(TaskPriority.class.getName());
+    private static final Logger logger = Logger.getLogger(TaskPriority.class.getName());
     private final int priorityLevel;
     private final String label;
 

@@ -16,14 +16,23 @@ public class Todo extends Task {
     }
 
     /**
+     * Creates a new Todo task with the given description and priority.
+     *
+     * @param description The description of the task.
+     * @param priority The priority of the task.
+     */
+    public Todo(String description, TaskPriority priority) {
+        super(description, priority);
+    }
+
+    /**
      * Creates a new Todo task with the given description and completion status.
-     * Used for loading a saved task.
      *
      * @param description The description of the task.
      * @param isDone Whether the task is marked as done.
      */
-    public Todo(String description, boolean isDone) {
-        super(description, isDone);
+    public Todo(String description, boolean isDone, TaskPriority priority) {
+        super(description, isDone, priority);
     }
 
     /**

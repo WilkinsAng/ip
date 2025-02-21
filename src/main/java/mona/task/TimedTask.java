@@ -14,6 +14,7 @@ public abstract class TimedTask extends Task {
     protected static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy h:mma");
     protected static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM d, h:mma");
 
+
     /**
      * Constructs a new TimedTask with the given description.
      *
@@ -23,15 +24,27 @@ public abstract class TimedTask extends Task {
         super(description);
     }
 
+
     /**
-     * Constructs a new TimedTask with the given description and completion status.
+     * Constructs a new TimedTask with the given description and priority.
+     *
+     * @param description The description of the task.
+     * @param priority The priority of the task.
+     */
+    public TimedTask(String description, TaskPriority priority) {
+        super(description, priority);
+    }
+
+    /**
+     * Constructs a new TimedTask with the given description, priority and completion status.
      * Used for loading a saved task.
      *
      * @param description The description of the task.
      * @param isDone Whether the task is initially marked as done.
+     * @param priority The priority of the task.
      */
-    public TimedTask(String description, boolean isDone) {
-        super(description, isDone);
+    public TimedTask(String description, boolean isDone, TaskPriority priority) {
+        super(description, isDone, priority);
     }
 
     /**
