@@ -9,8 +9,6 @@ import mona.ui.Ui;
  */
 public class ByeCommand extends Command {
 
-    private String reply;
-
     /**
      * Executes the command by setting the exit flag to true and displaying
      * a goodbye message to the user.

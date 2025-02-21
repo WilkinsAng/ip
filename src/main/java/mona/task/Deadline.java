@@ -23,16 +23,16 @@ public class Deadline extends TimedTask {
     }
 
     /**
-     * Constructs a Deadline with the specified description, completion status, and due date.
-     * Used for loading a saved task.
+     * Constructs a Deadline with the specified description, completion status, due date, and priority.
      *
      * @param description The task description.
      * @param isDone      The completion status of the task.
      * @param doneBy      The due date in string format.
+     * @param priority    The priority of the task.
      * @throws MonaException If the date format is invalid.
      */
-    public Deadline(String description, boolean isDone, String doneBy) throws MonaException {
-        super(description, isDone);
+    public Deadline(String description, boolean isDone, String doneBy, TaskPriority priority) throws MonaException {
+        super(description, isDone, priority);
         this.doneBy = TimedTask.parseDateTime(doneBy);
     }
 
@@ -44,7 +44,7 @@ public class Deadline extends TimedTask {
     @Override
     public String toString() {
         assert doneBy != null : "Done by date should not be null";
-        return "[D]" + super.toString() + " (by: %s)".formatted(TimedTask.formatDateTime(doneBy));
+        return "[D]" + super.toString() + " (by: %s) %s".formatted(TimedTask.formatDateTime(doneBy), priority);
     }
 
     /**
@@ -57,6 +57,6 @@ public class Deadline extends TimedTask {
         assert doneBy != null : "Done by date should not be null";
         String status = isDone ? "1" : "0";
         String formattedDate = doneBy.format(TimedTask.INPUT_FORMATTER);
-        return "D | %s | %s | %s".formatted(status, description, formattedDate);
+        return "%d | D | %s | %s | %s".formatted(priority.getPriorityLevel(), status, description, formattedDate);
     }
 }

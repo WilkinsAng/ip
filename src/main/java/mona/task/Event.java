@@ -26,17 +26,18 @@ public class Event extends TimedTask {
     }
 
     /**
-     * Constructs an Event task with the given description, start time, end time, and completion status.
-     * Used for loading a saved task.
+     * Constructs an Event task with the given description, start time, end time, completion status and priority.
      *
      * @param description The description of the event.
      * @param isDone The completion status of the event.
      * @param startFrom The start time of the event.
      * @param endBy The end time of the event.
+     * @param priority The priority of the event.
      * @throws MonaException If the start time or end time is invalid.
      */
-    public Event(String description, boolean isDone, String startFrom, String endBy) throws MonaException {
-        super(description, isDone);
+    public Event(String description, boolean isDone, String startFrom, String endBy, TaskPriority priority)
+            throws MonaException {
+        super(description, isDone, priority);
         this.startFrom = TimedTask.parseDateTime(startFrom);
         this.endBy = TimedTask.parseDateTime(endBy);
     }
@@ -49,8 +50,8 @@ public class Event extends TimedTask {
     @Override
     public String toString() {
         assert startFrom != null && endBy != null : "Start and end times should not be null";
-        return "[E]" + super.toString() + " (from: %s, to: %s)"
-                .formatted(TimedTask.formatDateTime(startFrom), TimedTask.formatDateTime(endBy));
+        return "[E]" + super.toString() + " (from: %s, to: %s) %s"
+                .formatted(TimedTask.formatDateTime(startFrom), TimedTask.formatDateTime(endBy), priority);
     }
 
     /**
@@ -64,6 +65,7 @@ public class Event extends TimedTask {
         String status = isDone ? "1" : "0";
         String formattedStart = startFrom.format(TimedTask.INPUT_FORMATTER);
         String formattedEnd = endBy.format(TimedTask.INPUT_FORMATTER);
-        return "E | %s | %s | %s - %s".formatted(status, description, formattedStart, formattedEnd);
+        return "%d | E | %s | %s | %s - %s"
+                .formatted(priority.getPriorityLevel(), status, description, formattedStart, formattedEnd);
     }
 }

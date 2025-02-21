@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import mona.exception.MonaException;
 import mona.task.Task;
-
+import mona.task.TaskPriority;
 
 /**
  * Handles user interactions, including displaying messages and reading user input.
@@ -16,14 +16,18 @@ import mona.task.Task;
 public class Ui {
 
     /**
-     * Displays the greeting message.
+     * Returns the greeting message.
+     *
+     * @return A String containing the greeting message.
      */
     public static String greet() {
         return "What's up, Joker? What are we going to do today?";
     }
 
     /**
-     * Displays the farewell message and closes the input scanner.
+     * Returns the farewell message.
+     *
+     * @return A String containing the farewell message.
      */
     public String bye() {
         return "We should get ready for tomorrow. Goodnight, Joker. Meowww.\n"
@@ -31,10 +35,11 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a task is added.
+     * Returns a message confirming the addition of a task.
      *
-     * @param task    The task that has been added.
-     * @param tasksSize The size of the task list.
+     * @param task      The task that has been added.
+     * @param tasksSize The current size of the task list.
+     * @return A String containing the confirmation message.
      */
     public String showAddTask(Task task, int tasksSize) {
         return String.format("Okie Joker, I'll help you remember to:\n %s.\n", task.toString())
@@ -42,11 +47,12 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a task is deleted.
+     * Returns a message confirming the deletion of a task.
      *
-     * @param index   The index of the task in the task list.
-     * @param task    The task that has been deleted.
-     * @param taskSize The size of the task list.
+     * @param index    The index of the task in the task list.
+     * @param task     The task that has been deleted.
+     * @param taskSize The current size of the task list.
+     * @return A String containing the confirmation message.
      */
     public String showDeleteTask(int index, Task task, int taskSize) {
         return String.format("Task #%d has been erased from existence, Joker!\n", index + 1)
@@ -55,9 +61,10 @@ public class Ui {
     }
 
     /**
-     * Displays all tasks currently in the list.
+     * Returns a message displaying all tasks in the list.
      *
-     * @param tasks The task list to be displayed.
+     * @param tasks The list of tasks to be displayed.
+     * @return A String containing the list of all tasks.
      */
     public String showAllTasks(ArrayList<Task> tasks) {
         String result = "Alright Joker, here is what you need to do:\n";
@@ -73,11 +80,11 @@ public class Ui {
     }
 
     /**
-     * Displays the results of a search query on the task list.
+     * Returns a message displaying the results of a search query on the task list.
      *
-     * @param tasks The list of tasks that match the search query.
-     * @param queries The search query entered by the user.
-     * @return A message to display to the user summarizing the search results.
+     * @param tasks   The list of tasks matching the search query.
+     * @param queries The search queries entered by the user.
+     * @return A String summarizing the search results.
      */
     public String showFindResults(ArrayList<Task> tasks, String... queries) {
         String formattedQueries = Arrays.stream(queries)
@@ -99,9 +106,10 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a task is marked as completed.
+     * Returns a message indicating a task has been marked as completed.
      *
      * @param task The task that has been marked as done.
+     * @return A String containing the confirmation message.
      */
     public String showMarkMessage(Task task) {
         return "All right, Joker! Very smooth!\n"
@@ -109,9 +117,10 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a task is marked as incomplete.
+     * Returns a message indicating a task has been marked as incomplete.
      *
      * @param task The task that has been marked as undone.
+     * @return A String containing the confirmation message.
      */
     public String showUnmarkMessage(Task task) {
         return "What?! You changed your mind, Joker...?!\n"
@@ -119,32 +128,44 @@ public class Ui {
     }
 
     /**
-     * Displays an error message.
+     * Returns an error message based on the exception provided.
      *
      * @param e The MonaException thrown.
-     * @return The error message.
+     * @return A String containing the error message.
      */
     public String showErrorMessage(MonaException e) {
         return e.getMessage();
     }
 
     /**
-     * Returns a message to be displayed when an IO error occurs during loading from file.
+     * Returns a message indicating a task's priority has been changed.
+     *
+     * @param task     The task whose priority has been changed.
+     * @param priority The new priority of the task.
+     * @return A String describing the priority change.
+     */
+    public String showPriorityChange(Task task, TaskPriority priority) {
+        return String.format("Meow-ha! Task: \n"
+                + " %s\n"
+                + "is now at %s priority! Better get to it before it becomes a real heist!", task, priority);
+    }
+
+    /**
+     * Returns a message indicating an IO error occurred during file loading.
      *
      * @param e The IOException thrown.
-     * @return A message describing the error to the user.
+     * @return A String describing the loading error.
      */
     public String showLoadingError(IOException e) {
         return "Whoa! Looks like a glitch in the system! I got this message: *"
                 + e.getMessage() + "*. Better check the files, Joker!";
     }
 
-
     /**
-     * Returns a message to be displayed when an IO error occurs during saving to file.
+     * Returns a message indicating an IO error occurred during file saving.
      *
      * @param e The IOException thrown.
-     * @return A message describing the error to the user.
+     * @return A String describing the saving error.
      */
     public String showSavingError(IOException e) {
         return "Whoa! Looks like a something went wrong while saving, Joker! I got this message: *"

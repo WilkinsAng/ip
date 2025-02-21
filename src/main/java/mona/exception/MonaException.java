@@ -184,4 +184,18 @@ public class MonaException extends Exception {
             super("Hey! Did you forget or something?! This task is already incomplete!\n%s".formatted(task));
         }
     }
+
+    /**
+     * Exception thrown when the priority is invalid.
+     */
+    public static class InvalidPrioritizeException extends MonaException {
+
+        /**
+         * Constructs a new InvalidPrioritizeException.
+         */
+        public InvalidPrioritizeException() {
+            super("Whoa there, Joker! This isn’t a valid priority!\n"
+                + "Write in this format: prioritize <task number> <priority: 1(HIGH), 2(MEDIUM), 3(LOW)>");
+        }
+    }
 }
