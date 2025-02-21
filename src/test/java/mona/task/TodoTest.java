@@ -42,12 +42,12 @@ public class TodoTest {
         Todo todo = new Todo("Test"); //Create test Task
 
         //Verify the full output format
-        assertEquals("[T][ ] Test", todo.toString());
+        assertEquals("[T][ ] Test [LOW]", todo.toString());
 
         //Verify task is not done initially
         assertFalse(todo.isDone, "New tasks should be marked as not done by default");
         todo.markAsDone();
-        assertEquals("[T][X] Test", todo.toString(), "Incorrect string representation for a completed task");
+        assertEquals("[T][X] Test [LOW]", todo.toString(), "Incorrect string representation for a completed task");
     }
 
     @Test
@@ -55,10 +55,10 @@ public class TodoTest {
         Todo todo = new Todo("Test"); //Create test Task
 
         //Verify that the save format is correct when the task is incomplete
-        assertEquals("T | 0 | Test", todo.toSaveFormat(), "Incorrect save format for an incomplete task");
+        assertEquals("3 | T | 0 | Test", todo.toSaveFormat(), "Incorrect save format for an incomplete task");
 
         //Verify that the save format is correct when the task is complete
         todo.markAsDone();
-        assertEquals("T | 1 | Test", todo.toSaveFormat(), "Incorrect save format for a completed task");
+        assertEquals("3 | T | 1 | Test", todo.toSaveFormat(), "Incorrect save format for a completed task");
     }
 }

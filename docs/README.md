@@ -10,7 +10,7 @@ Whether you're adding **To-Dos**, setting **Deadlines**, or scheduling **Events*
 
 ## Quick Start
 1. Ensure you have **Java 17 or later** installed.
-2. Download the latest **Mona.jar** from [here](#).
+2. Download the latest **Mona.jar** from [here](https://github.com/WilkinsAng/ip/releases/download/A-UserGuide/Mona-v0.9.jar).
 3. Place the file in your desired **working directory**.
 4. Run the application using: `java -jar Mona.jar`
 5. A GUI will appear. Mona will greet you and is ready to take your commands!
@@ -43,7 +43,7 @@ deadline <Description> /by <Date>
 ```
 
 #### **Example:**
-- `dealine Submit heist plan /by 25 Feb 2025 11:59pm`
+- `deadline Submit heist plan /by 25 Feb 2025 11:59pm`
 - `deadline Submit report /by 20 Feb 2025 11:59pm`
 
 #### **Expected Output:**
