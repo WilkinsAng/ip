@@ -169,6 +169,7 @@ Here are the results for "phantom", Joker!:
 
 ### Prioritizing a Task
 Changes the priority of a specified task.
+The list will be sorted to reflect the new priority order.
 ```
 prioritize <Task Number> <Priority (1-HIGH, 2-MEDIUM, 3-LOW)>
 ```
