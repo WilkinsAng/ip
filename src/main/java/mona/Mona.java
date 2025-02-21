@@ -26,6 +26,7 @@ public class Mona {
         ui = new Ui();
         storage = new Storage(ui, filePath);
         tasks = new TaskList(storage.loadData());
+        tasks.sortTasks();
     }
 
 

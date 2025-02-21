@@ -89,7 +89,7 @@ public class StorageParser {
      */
     public static Event handleEvent(TaskPriority priority, String[] splitLine, String description, boolean isDone)
             throws MonaException {
-        if (splitLine.length != 6) {
+        if (splitLine.length != 5) {
             throw new MonaException.CorruptedFileException();
         }
         String[] startEnd = splitLine[4].split(" - ");

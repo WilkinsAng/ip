@@ -131,7 +131,7 @@ public class Parser {
 
         //If the first part is just the word "deadline", then there is no description.
         if (parts[0].strip().equalsIgnoreCase("deadline")) {
-            throw new MonaException.EmptyDescriptionException("deadline task");
+            throw new MonaException.EmptyDescriptionException("deadline");
         }
 
         //i.e. 2nd half doesn't exist.
