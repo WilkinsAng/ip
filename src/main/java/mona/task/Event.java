@@ -80,6 +80,7 @@ public class Event extends TimedTask {
         String status = isDone ? "1" : "0";
         String formattedStart = startFrom.format(TimedTask.INPUT_FORMATTER);
         String formattedEnd = endBy.format(TimedTask.INPUT_FORMATTER);
-        return "E | %s | %s | %s - %s".formatted(status, description, formattedStart, formattedEnd);
+        return "%d | E | %s | %s | %s - %s"
+                .formatted(priority.getPriorityLevel(), status, description, formattedStart, formattedEnd);
     }
 }

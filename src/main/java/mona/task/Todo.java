@@ -53,6 +53,6 @@ public class Todo extends Task {
     @Override
     public String toSaveFormat() {
         String status = isDone ? "1" : "0";
-        return "T | %s | %s".formatted(status, description);
+        return "%d | T | %s | %s".formatted(priority.getPriorityLevel(), status, description);
     }
 }

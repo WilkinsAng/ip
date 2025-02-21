@@ -70,6 +70,6 @@ public class Deadline extends TimedTask {
         assert doneBy != null : "Done by date should not be null";
         String status = isDone ? "1" : "0";
         String formattedDate = doneBy.format(TimedTask.INPUT_FORMATTER);
-        return "D | %s | %s | %s".formatted(status, description, formattedDate);
+        return "%d | D | %s | %s | %s".formatted(priority.getPriorityLevel(), status, description, formattedDate);
     }
 }
