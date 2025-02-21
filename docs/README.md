@@ -40,8 +40,10 @@ Creates a task with deadline.
 
 #### **Format:**
 ```plaintext
-deadline <Description> /by <Date: dd mmm yyyy Time: 12hr format + am/pm (12:00am)>
+deadline <Description> /by <Date: dd Mmm yyyy Time: 12hr format + am/pm (12:00am)>
 ```
+
+**Note: The date month's first letter must be capitalized (eg. Jan, Feb)**
 
 #### **Example:**
 - `deadline Submit heist plan /by 25 Feb 2025 11:59pm`
@@ -58,7 +60,7 @@ Don't forget, you have 2 tasks now.
 Creates a task with a start and end date-time.
 
 #### **Format:**
-Date format is the same as deadlines.
+**Note: Date format is the same as deadlines.**
 ```plaintext
 event <Description> /from <Start Date> /to <End Date>
 ```
