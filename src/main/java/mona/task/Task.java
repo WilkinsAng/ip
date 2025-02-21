@@ -106,7 +106,7 @@ public abstract class Task implements Comparable<Task> {
      */
     @Override
     public String toString() {
-        return "%s: [%s] %s".formatted(priority, getStatusIcon(), description);
+        return "[%s] %s".formatted(getStatusIcon(), description);
     }
 
     /**

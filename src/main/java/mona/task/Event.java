@@ -65,8 +65,8 @@ public class Event extends TimedTask {
     @Override
     public String toString() {
         assert startFrom != null && endBy != null : "Start and end times should not be null";
-        return "[E]" + super.toString() + " (from: %s, to: %s)"
-                .formatted(TimedTask.formatDateTime(startFrom), TimedTask.formatDateTime(endBy));
+        return "[E]" + super.toString() + " (from: %s, to: %s) %s"
+                .formatted(TimedTask.formatDateTime(startFrom), TimedTask.formatDateTime(endBy), priority);
     }
 
     /**

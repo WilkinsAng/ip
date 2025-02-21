@@ -57,7 +57,7 @@ public class Deadline extends TimedTask {
     @Override
     public String toString() {
         assert doneBy != null : "Done by date should not be null";
-        return "[D]" + super.toString() + " (by: %s)".formatted(TimedTask.formatDateTime(doneBy));
+        return "[D]" + super.toString() + " (by: %s) %s".formatted(TimedTask.formatDateTime(doneBy), priority);
     }
 
     /**
