@@ -1,5 +1,6 @@
 package mona.command;
 
+import mona.exception.MonaException;
 import mona.storage.Storage;
 import mona.task.Task;
 import mona.task.TaskList;
@@ -34,10 +35,14 @@ public class PrioritizeCommand extends Command {
      * @param storage The storage handler to save the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws MonaException {
         assert tasks != null : "TaskList should not be null";
         assert ui != null : "Ui should not be null";
         assert storage != null : "Storage should not be null";
+
+        if (taskIndex < 0 || taskIndex >= tasks.getSize()) {
+            throw new MonaException.TaskNotFoundException(taskIndex + 1);
+        }
 
         Task task = tasks.getTask(taskIndex);
         task.setPriority(priority);

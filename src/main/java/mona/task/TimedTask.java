@@ -3,6 +3,7 @@ package mona.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 import mona.exception.MonaException;
 
@@ -11,8 +12,10 @@ import mona.exception.MonaException;
  * Provides utility methods for parsing and formatting date-time values.
  */
 public abstract class TimedTask extends Task {
-    protected static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy h:mma");
-    protected static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM d, h:mma");
+    protected static final DateTimeFormatter INPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("d MMM yyyy h:mma", Locale.forLanguageTag("en-SG"));
+    protected static final DateTimeFormatter OUTPUT_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy MMM d, h:mma", Locale.forLanguageTag("en-SG"));
 
     /**
      * Constructs a new TimedTask with the given description.
@@ -46,6 +49,7 @@ public abstract class TimedTask extends Task {
      */
     public static LocalDateTime parseDateTime(String date) throws MonaException {
         try {
+            System.out.println(INPUT_FORMATTER.getLocale());
             return LocalDateTime.parse(date, INPUT_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new MonaException.InvalidDateFormatException();
