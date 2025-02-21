@@ -19,6 +19,8 @@ Whether you're adding **To-Dos**, setting **Deadlines**, or scheduling **Events*
 
 ###  Adding a To-Do Task
 Creates a simple task with a description.
+
+*Note: All tasks are set to a default priority of `LOW`.*
 #### **Format:**
 ```plaintext
 todo <Description>
@@ -39,7 +41,7 @@ Creates a task with deadline.
 
 #### **Format:**
 ```plaintext
-deadline <Description> /by <Date>
+deadline <Description> /by <Date: dd mmm yyyy Time: 12hr format + am/pm (12:00am)>
 ```
 
 #### **Example:**
@@ -57,6 +59,7 @@ Don't forget, you have 2 tasks now.
 Creates a task with a start and end date-time.
 
 #### **Format:**
+Date format is the same as deadlines.
 ```plaintext
 event <Description> /from <Start Date> /to <End Date>
 ```
