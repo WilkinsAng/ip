@@ -26,21 +26,6 @@ public class Event extends TimedTask {
     }
 
     /**
-     * Constructs an Event task with the given description, start time, end time and priority.
-     *
-     * @param description The description of the event.
-     * @param startFrom The start time of the event.
-     * @param endBy The end time of the event.
-     * @param priority The priority of the event.
-     * @throws MonaException If the start time or end time is invalid.
-     */
-    public Event(String description, String startFrom, String endBy, TaskPriority priority) throws MonaException {
-        super(description, priority);
-        this.startFrom = TimedTask.parseDateTime(startFrom);
-        this.endBy = TimedTask.parseDateTime(endBy);
-    }
-
-    /**
      * Constructs an Event task with the given description, start time, end time, completion status and priority.
      *
      * @param description The description of the event.

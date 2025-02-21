@@ -10,10 +10,12 @@ import mona.command.DeleteCommand;
 import mona.command.FindCommand;
 import mona.command.ListCommand;
 import mona.command.MarkCommand;
+import mona.command.PrioritizeCommand;
 import mona.command.UnmarkCommand;
 import mona.exception.MonaException;
 import mona.task.Deadline;
 import mona.task.Event;
+import mona.task.TaskPriority;
 import mona.task.Todo;
 
 /**
@@ -47,6 +49,8 @@ public class Parser {
             return handleDelete(message);
         case FIND:
             return handleFind(splitMsg);
+        case PRIORITIZE:
+            return handlePrioritize(splitMsg);
         case BYE:
             return createByeCommand();
         default:
@@ -203,5 +207,26 @@ public class Parser {
             }
         }
         return new FindCommand(queries.toArray(new String[0]));
+    }
+
+    /**
+     * Handles prioritizing a task in the task list.
+     *
+     * @param parts The user input split into words.
+     * @return a new {@link PrioritizeCommand}
+     * @throws MonaException if the input is invalid
+     */
+    public static PrioritizeCommand handlePrioritize(String[] parts) throws MonaException {
+        if (parts.length != 3) {
+            throw new MonaException.InvalidPrioritizeException();
+        }
+
+        try {
+            int index = Integer.parseInt(parts[1]) - 1;
+            int priority = Integer.parseInt(parts[2]);
+            return new PrioritizeCommand(index, TaskPriority.fromPriorityLevel(priority));
+        } catch (IllegalArgumentException e) {
+            throw new MonaException.InvalidPrioritizeException();
+        }
     }
 }

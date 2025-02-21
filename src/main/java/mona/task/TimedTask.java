@@ -14,7 +14,6 @@ public abstract class TimedTask extends Task {
     protected static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy h:mma");
     protected static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy MMM d, h:mma");
 
-
     /**
      * Constructs a new TimedTask with the given description.
      *
@@ -22,17 +21,6 @@ public abstract class TimedTask extends Task {
      */
     public TimedTask(String description) {
         super(description);
-    }
-
-
-    /**
-     * Constructs a new TimedTask with the given description and priority.
-     *
-     * @param description The description of the task.
-     * @param priority The priority of the task.
-     */
-    public TimedTask(String description, TaskPriority priority) {
-        super(description, priority);
     }
 
     /**
@@ -48,10 +36,12 @@ public abstract class TimedTask extends Task {
     }
 
     /**
-     * Parses a date-time string into a {@code LocalDateTime} object.
+     * Parses a date-time string into a {@link LocalDateTime} object.
+     * The string must be in the format "d MMM yyyy h:mma" (e.g., "28 Jan 2024 11:30PM").
+     * Otherwise, a {@link MonaException.InvalidDateFormatException} is thrown.
      *
      * @param date The string to parse.
-     * @return A {@code LocalDateTime} object representing the parsed date and time.
+     * @return A {@link LocalDateTime} object representing the parsed date and time.
      * @throws MonaException.InvalidDateFormatException If the date format is invalid.
      */
     public static LocalDateTime parseDateTime(String date) throws MonaException {
@@ -63,14 +53,16 @@ public abstract class TimedTask extends Task {
     }
 
     /**
-     * Formats a {@code LocalDateTime} object into a human-readable string.
+     * Formats a {@link LocalDateTime} object into a human-readable string.
+     * The formatted string is in the format "yyyy MMM d, h:mma" (e.g., "2024 Jul 15, 11:30PM"),
+     * or "No date provided" if {@code date} is {@code null}.
      *
-     * @param date The {@code LocalDateTime} object to format.
-     * @return A formatted date-time string in the format {@code "yyyy MMM d, h:mma"} (e.g., "2024 Jul 15, 11:30PM"),
-     *         or "No date provided" if {@code date} is {@code null}.
+     * @param date The {@link LocalDateTime} object to format.
+     * @return A formatted date-time string.
      */
     public static String formatDateTime(LocalDateTime date) {
         assert date != null;
+
         return date.format(OUTPUT_FORMATTER);
     }
 }

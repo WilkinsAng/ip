@@ -14,6 +14,7 @@ public class StorageParser {
 
     /**
      * Parses a line of the save file into a {@link Task} object.
+     *
      * @param line The line of the storage file to parse.
      * @return The parsed {@link Task} object.
      * @throws MonaException If the line is malformed.
@@ -40,7 +41,9 @@ public class StorageParser {
 
     /**
      * Parses a line of the storage file into a {@link Todo} object.
-     * @param splitLine Array of Strings representing [task type, completion status, description].
+     *
+     * @param priority The priority of the task.
+     * @param splitLine Array of Strings representing [priority, task type, completion status, description].
      * @param description The description of the task.
      * @param isDone The completion status of the task.
      * @return The parsed {@link Todo} object.
@@ -56,7 +59,9 @@ public class StorageParser {
 
     /**
      * Parses a line of the storage file into a {@link Deadline} object.
-     * @param splitLine Array of Strings representing [task type, completion status, description, deadline].
+     *
+     * @param priority The priority of the task.
+     * @param splitLine Array of Strings representing [priority, task type, completion status, description, deadline].
      * @param description The description of the task.
      * @param isDone The completion status of the task.
      * @return The parsed {@link Deadline} object.
@@ -72,9 +77,11 @@ public class StorageParser {
     }
 
     /**
-     * Parses a line of the storage file into a {@link Event} object.
-     * @param splitLine Array of Strings representing [task type, completion status,
-     *                  description, start date, end date].
+     * Parses a line of the storage file into an {@link Event} object.
+     *
+     * @param priority The priority of the task.
+     * @param splitLine Array of Strings representing [priority, task type, completion status,
+     *                  description, start date - end date].
      * @param description The description of the task.
      * @param isDone The completion status of the task.
      * @return The parsed {@link Event} object.

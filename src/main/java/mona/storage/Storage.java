@@ -36,6 +36,7 @@ public class Storage {
 
     /**
      * Constructor for Storage object with a custom file path.
+     * @param ui The user interface to use for displaying messages.
      * @param filepath The filepath to use for storing tasks.
      */
     public Storage(Ui ui, String filepath) {

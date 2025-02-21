@@ -94,4 +94,8 @@ public class TaskList {
                 })
                 .collect(Collectors.toCollection(ArrayList::new));
     }
+
+    public void sortTasks() {
+        tasks.sort(Task::compareTo);
+    }
 }

@@ -2,12 +2,14 @@ package mona.task;
 
 /**
  * Represents a Todo task with a description and completion status.
+ *
+ * <p>A Todo task is a basic task type that does not have a deadline or any
+ * additional information.
  */
 public class Todo extends Task {
 
     /**
      * Creates a new Todo task with the given description.
-     * The task is initially marked as not done.
      *
      * @param description The description of the task.
      */
@@ -16,20 +18,11 @@ public class Todo extends Task {
     }
 
     /**
-     * Creates a new Todo task with the given description and priority.
-     *
-     * @param description The description of the task.
-     * @param priority The priority of the task.
-     */
-    public Todo(String description, TaskPriority priority) {
-        super(description, priority);
-    }
-
-    /**
      * Creates a new Todo task with the given description and completion status.
      *
      * @param description The description of the task.
      * @param isDone Whether the task is marked as done.
+     * @param priority The priority level of the task.
      */
     public Todo(String description, boolean isDone, TaskPriority priority) {
         super(description, isDone, priority);
